@@ -4,29 +4,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Robotics Club</title>
+    <title>Robotics Club | Future of Tech</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Inter -->
+    <!-- Google Fonts: Inter & Orbitron -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@400;500;700;900&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body class="text-gray-800">
+<body class="text-gray-100 font-inter overflow-x-hidden">
+
+    <!-- Background Grid Animation Container -->
+    <div class="fixed inset-0 z-[-1] grid-bg"></div>
 
     <!-- Header -->
-    <header class="header-bg text-white shadow-lg sticky top-0 z-50">
-        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
-            <a href="#" class="flex items-center space-x-4">
+    <header class="fixed w-full top-0 z-50 glass-header transition-all duration-300">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="flex items-center space-x-3 group">
                 <!-- Logo Image -->
-                <img src="media/logo.png" alt="Robotics Club Logo" class="h-12 w-auto">
-                <span class="text-2xl font-bold">Robotics Club</span>
+                <img src="media/logo.png" alt="Robotics Club Logo"
+                    class="h-10 w-auto group-hover:drop-shadow-[0_0_8px_rgba(6,182,212,0.8)] transition-all">
+                <span
+                    class="text-xl font-bold font-orbitron tracking-wider text-white group-hover:text-cyan-400 transition-colors">ROBOTICS<span
+                        class="text-cyan-400">.CLUB</span></span>
             </a>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#hero"
+                    class="nav-link text-sm font-medium tracking-wide hover:text-cyan-400 transition-colors">HOME</a>
+                <a href="#about"
+                    class="nav-link text-sm font-medium tracking-wide hover:text-cyan-400 transition-colors">ABOUT</a>
+                <a href="#projects"
+                    class="nav-link text-sm font-medium tracking-wide hover:text-cyan-400 transition-colors">PROJECTS</a>
+                <a href="#training"
+                    class="nav-link text-sm font-medium tracking-wide hover:text-cyan-400 transition-colors">TRAINING</a>
+                <a href="#team"
+                    class="nav-link text-sm font-medium tracking-wide hover:text-cyan-400 transition-colors">TEAM</a>
+                <a href="#contact"
+                    class="px-4 py-2 border border-cyan-400 text-cyan-400 text-sm font-bold rounded hover:bg-cyan-400 hover:text-black transition-all shadow-[0_0_10px_rgba(6,182,212,0.3)] hover:shadow-[0_0_20px_rgba(6,182,212,0.6)]">JOIN
+                    US</a>
+            </div>
+
             <!-- Mobile Menu Button -->
-            <button id="mobile-menu-button" class="md:hidden">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <button id="mobile-menu-button" class="md:hidden text-white hover:text-cyan-400">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7">
                     </path>
                 </svg>
@@ -35,636 +61,627 @@
     </header>
 
     <!-- Main Body -->
-    <main class="py-8 md:py-12">
-        <div class="container mx-auto px-4">
+    <main>
 
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <!-- Main Content Column -->
-                <div class="lg:col-span-2 space-y-8">
-                    <!-- Feature Article -->
-                    <section id="feature" class="card overflow-hidden">
-                        <img class="w-full h-64 object-cover" src="media/banner.png" alt="Innovate. Build. Inspire.">
-                        <div class="p-6">
-                            <h2 class="text-3xl font-bold mb-3 text-gray-900">Innovate. Build. Inspire.</h2>
-                            <p class="text-gray-600 leading-relaxed">Join a community of creators and problem-solvers
-                                shaping the future of intelligent machines. This semester is packed with new projects,
-                                competitions, and learning opportunities. Let's build something amazing together.</p>
-                        </div>
-                    </section>
-
-                    <!-- Current Work Section -->
-                    <section id="work" class="card p-6">
-                        <h2 class="text-2xl font-bold mb-6 border-l-4 border-red-500 pl-4">Project Spotlight</h2>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <!-- Project 1 -->
-                            <div class="inner-card border rounded-lg p-4">
-                                <h3 class="font-bold text-lg text-gray-800">RoboCup 2025 Prep</h3>
-                                <p class="text-sm text-gray-600 mt-1">The team is finalizing the autonomous navigation
-                                    system for our soccer bot. Testing begins next week!</p>
-                            </div>
-                            <!-- Project 2 -->
-                            <div class="inner-card border rounded-lg p-4">
-                                <h3 class="font-bold text-lg text-gray-800">Control Systems Research</h3>
-                                <p class="text-sm text-gray-600 mt-1">Implementing new stability algorithms for our
-                                    drone platform. Early results show a 20% reduction in flight drift.</p>
-                            </div>
-                        </div>
-                    </section>
-
-                    <!-- Upcoming Events & News Section -->
-                    <section id="events" class="card p-6">
-                        <h2 class="text-2xl font-bold mb-6 border-l-4 border-red-500 pl-4">Upcoming Events & News</h2>
-                        <div class="space-y-4">
-                            <!-- Event Card 1 -->
-                            <div class="inner-card border rounded-lg p-4 bg-gray-50">
-                                <p class="text-sm font-semibold text-emerald-600">October 3, 2025</p>
-                                <h3 class="font-bold text-lg text-gray-800 mt-1">Guest Lecture: AI in Autonomous
-                                    Vehicles</h3>
-                                <p class="text-sm text-gray-600 mt-1">Join us for a talk by Dr. Evelyn Reed from the
-                                    National Robotics Institute. Room 404, Engineering Hall.</p>
-                            </div>
-                            <!-- Event Card 2 -->
-                            <div class="inner-card border rounded-lg p-4 bg-gray-50">
-                                <p class="text-sm font-semibold text-emerald-600">October 15, 2025</p>
-                                <h3 class="font-bold text-lg text-gray-800 mt-1">Fall Semester Kick-off Workshop</h3>
-                                <p class="text-sm text-gray-600 mt-1">New to robotics? Our beginner-friendly workshop
-                                    will cover the basics of Arduino and circuit design. Sign-ups open next week!</p>
-                            </div>
-                            <!-- Event Card 3 -->
-                            <div class="inner-card border rounded-lg p-4 bg-gray-50">
-                                <p class="text-sm font-semibold text-emerald-600">November 1, 2025</p>
-                                <h3 class="font-bold text-lg text-gray-800 mt-1">Team Tryouts for Spring Competition
-                                </h3>
-                                <p class="text-sm text-gray-600 mt-1">We are recruiting new members for the software and
-                                    hardware teams for the upcoming MATE ROV competition.</p>
-                            </div>
-                        </div>
-                    </section>
-
-                    <!-- Technical & Career Growth Section -->
-                    <section id="growth" class="card p-6 group cursor-pointer">
-                        <div class="flex justify-between items-center">
-                            <h2
-                                class="text-2xl font-bold border-l-4 border-green-500 pl-4 group-hover:text-green-600 transition-colors">
-                                Technical & Career Growth</h2>
-                            <svg class="w-6 h-6 text-gray-500 transform transition-transform duration-300 group-hover:rotate-180"
-                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </div>
-                        <ul
-                            class="space-y-4 text-gray-600 mt-4 max-h-0 opacity-0 overflow-hidden group-hover:max-h-screen group-hover:opacity-100 transition-all ease-in-out duration-700">
-                            <li class="flex items-start">
-                                <svg class="w-5 h-5 text-green-500 mr-3 mt-1 flex-shrink-0" fill="currentColor"
-                                    viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd"
-                                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                        clip-rule="evenodd"></path>
-                                </svg>
-                                <div>
-                                    <strong class="font-semibold text-gray-800">Practical Skills:</strong> Go beyond
-                                    textbooks and learn Arduino programming, AI/ML basics, mechanical design
-                                    (CAD/MATLAB), and ROS in our hands-on workshops.
-                                </div>
-                            </li>
-                            <li class="flex items-start">
-                                <svg class="w-5 h-5 text-green-500 mr-3 mt-1 flex-shrink-0" fill="currentColor"
-                                    viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd"
-                                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                        clip-rule="evenodd"></path>
-                                </svg>
-                                <div>
-                                    <strong class="font-semibold text-gray-800">Build Your Portfolio:</strong> Work on
-                                    impressive projects that will make you stand out to employers and graduate programs.
-                                </div>
-                            </li>
-                            <li class="flex items-start">
-                                <svg class="w-5 h-5 text-green-500 mr-3 mt-1 flex-shrink-0" fill="currentColor"
-                                    viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd"
-                                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                        clip-rule="evenodd"></path>
-                                </svg>
-                                <div>
-                                    <strong class="font-semibold text-gray-800">Mentorship:</strong> Get guidance and
-                                    support from experienced senior students and faculty mentors.
-                                </div>
-                            </li>
-                            <li class="flex items-start">
-                                <svg class="w-5 h-5 text-green-500 mr-3 mt-1 flex-shrink-0" fill="currentColor"
-                                    viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd"
-                                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                        clip-rule="evenodd"></path>
-                                </svg>
-                                <div>
-                                    <strong class="font-semibold text-gray-800">Competition Experience:</strong>
-                                    Participate in major events like RoboCup and ROBOCON to test your skills and compete
-                                    on a national level.
-                                </div>
-                            </li>
-                            <li class="flex items-start">
-                                <svg class="w-5 h-5 text-green-500 mr-3 mt-1 flex-shrink-0" fill="currentColor"
-                                    viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd"
-                                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                        clip-rule="evenodd"></path>
-                                </svg>
-                                <div>
-                                    <strong class="font-semibold text-gray-800">Future-Ready:</strong> Develop into a
-                                    dynamic innovator and problem-solver, a "future-ready engineer" prepared for a
-                                    career in robotics and beyond.
-                                </div>
-                            </li>
-                        </ul>
-                    </section>
-
-                </div>
-
-                <!-- Sidebar Column -->
-                <aside class="space-y-8">
-                    <!-- About Section -->
-                    <section id="about" class="card p-6">
-                        <h2 class="text-2xl font-bold mb-4">About The Club</h2>
-                        <p class="text-gray-600 space-y-3">
-                            <span>The Robotics Club at Amrita Vishwa Vidyapeetham, Amaravati Campus, is a vibrant,
-                                multidisciplinary community of students
-                                passionate about robotics, AI, and automation. It is open to all disciplines and
-                                encourages collaboration and
-                                creativity.</span>
-                            <span>Founded in 2024, we provide a hands-on environment to learn, collaborate, and
-                                build.</span>
-                        </p>
-                    </section>
-
-                    <!-- Mission & Vision Section -->
-                    <section id="mission" class="card p-6">
-                        <div class="mb-4">
-                            <h3 class="font-bold text-xl mb-2">Our Mission</h3>
-                            <p class="text-gray-600">The club's mission is encapsulated in its theme, "Innovate,
-                                Automate, and Elevate: Building the Future with AI for
-                                Robotics." This mission is designed to empower undergraduate students with the essential
-                                skills, knowledge, and
-                                creativity required to explore the dynamic field of robotics.</p>
-                        </div>
-                        <div>
-                            <h3 class="font-bold text-xl mb-2">Our Vision</h3>
-                            <p class="text-gray-600">To be the premier campus hub where students transform theoretical
-                                knowledge into real-world robotic solutions, fostering
-                                a culture of practical innovation that prepares them to lead in a technology-driven
-                                world.</p>
-                        </div>
-                    </section>
-                </aside>
+        <!-- Hero Section -->
+        <section id="hero" class="min-h-screen flex items-center justify-center relative pt-20">
+            <div class="absolute inset-0 z-0">
+                <div class="absolute inset-0 bg-gradient-to-b from-transparent via-slate-900/80 to-slate-900"></div>
+                <!-- We can add a video or animated bg here later -->
             </div>
 
-            <!-- Training Section -->
-            <section id="training" class="card mt-8 p-6 training-bg">
-                <h2 class="text-2xl font-bold mb-6 border-l-4 border-purple-500 pl-4">We train you in</h2>
-                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <div class="container mx-auto px-4 z-10 text-center">
+                <h2 class="text-cyan-400 font-orbitron tracking-[0.2em] text-sm md:text-base mb-4 animate-pulse">
+                    SYSTEM.INIT(2025)</h2>
+                <h1 class="text-5xl md:text-7xl lg:text-8xl font-black font-orbitron mb-6 leading-tight glitch-text"
+                    data-text="INNOVATE. BUILD. INSPIRE.">
+                    INNOVATE.<br>BUILD.<br><span
+                        class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-600">INSPIRE.</span>
+                </h1>
+                <p class="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
+                    Join the elite community of creators shaping the future of intelligent machines.
+                    <span class="text-cyan-400">AI</span>, <span class="text-purple-400">Robotics</span>, and <span
+                        class="text-green-400">Automation</span> converge here.
+                </p>
+                <div class="flex flex-col md:flex-row justify-center gap-4">
+                    <a href="#projects"
+                        class="px-8 py-4 bg-cyan-500 text-black font-bold font-orbitron tracking-wide rounded hover:bg-cyan-400 hover:scale-105 transition-all shadow-[0_0_20px_rgba(6,182,212,0.5)]">
+                        EXPLORE PROJECTS
+                    </a>
+                    <a href="#training"
+                        class="px-8 py-4 border border-purple-500 text-purple-400 font-bold font-orbitron tracking-wide rounded hover:bg-purple-500/10 hover:text-purple-300 transition-all">
+                        START TRAINING
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About & Mission Section (Split Layout) -->
+        <section id="about" class="py-20 relative">
+            <div class="container mx-auto px-4">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                    <div class="space-y-8">
+                        <div class="border-l-4 border-cyan-400 pl-6">
+                            <h2 class="text-3xl md:text-4xl font-bold font-orbitron text-white mb-2">ABOUT THE CLUB</h2>
+                            <p class="text-cyan-400 font-mono text-sm">> ACCESSING ARCHIVES...</p>
+                        </div>
+                        <p class="text-gray-300 text-lg leading-relaxed">
+                            The Robotics Club at Amrita Vishwa Vidyapeetham is a vibrant, multidisciplinary hub.
+                            Founded in 2024, we bridge the gap between theoretical knowledge and real-world application.
+                        </p>
+
+                        <div class="glass-card p-6 rounded-lg border border-white/10">
+                            <h3 class="text-xl font-bold font-orbitron text-purple-400 mb-3">OUR MISSION</h3>
+                            <p class="text-gray-400">
+                                "Innovate, Automate, and Elevate." We empower students to lead in a technology-driven
+                                world through practical innovation.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="relative">
+                        <div
+                            class="absolute -inset-4 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-lg opacity-30 blur-lg">
+                        </div>
+                        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2070&auto-format&fit=crop"
+                            alt="Robotics Lab"
+                            class="relative rounded-lg shadow-2xl border border-white/10 w-full object-cover h-[400px]">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Spotlight (Grid) -->
+        <section id="projects" class="py-20 bg-slate-900/50">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-5xl font-bold font-orbitron text-white mb-4">PROJECT SPOTLIGHT</h2>
+                    <div class="h-1 w-24 bg-gradient-to-r from-cyan-400 to-purple-600 mx-auto"></div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Project 1 -->
+                    <div class="glass-card p-1 rounded-xl hover:scale-[1.02] transition-all duration-300 group">
+                        <div class="bg-slate-800/80 p-6 rounded-lg h-full flex flex-col relative overflow-hidden">
+                            <div
+                                class="absolute top-0 right-0 p-2 opacity-50 group-hover:opacity-100 transition-opacity">
+                                <svg class="w-6 h-6 text-cyan-400" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                                </svg>
+                            </div>
+                            <h3
+                                class="text-xl font-bold font-orbitron text-white mb-2 group-hover:text-cyan-400 transition-colors">
+                                ROBOCUP 2025</h3>
+                            <p class="text-gray-400 text-sm mb-4 flex-grow">Autonomous navigation system for soccer
+                                bots. Advanced pathfinding algorithms implemented.</p>
+                            <div class="flex items-center justify-between mt-4 border-t border-white/10 pt-4">
+                                <span class="text-xs font-mono text-cyan-500">STATUS: ACTIVE</span>
+                                <span class="text-xs text-gray-500">v2.4.0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="glass-card p-1 rounded-xl hover:scale-[1.02] transition-all duration-300 group">
+                        <div class="bg-slate-800/80 p-6 rounded-lg h-full flex flex-col relative overflow-hidden">
+                            <div
+                                class="absolute top-0 right-0 p-2 opacity-50 group-hover:opacity-100 transition-opacity">
+                                <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <h3
+                                class="text-xl font-bold font-orbitron text-white mb-2 group-hover:text-purple-400 transition-colors">
+                                DRONE SWARM</h3>
+                            <p class="text-gray-400 text-sm mb-4 flex-grow">Stability algorithms for multi-drone
+                                coordination. 20% reduction in flight drift.</p>
+                            <div class="flex items-center justify-between mt-4 border-t border-white/10 pt-4">
+                                <span class="text-xs font-mono text-purple-500">STATUS: TESTING</span>
+                                <span class="text-xs text-gray-500">v1.1.beta</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 3 -->
+                    <div class="glass-card p-1 rounded-xl hover:scale-[1.02] transition-all duration-300 group">
+                        <div class="bg-slate-800/80 p-6 rounded-lg h-full flex flex-col relative overflow-hidden">
+                            <div
+                                class="absolute top-0 right-0 p-2 opacity-50 group-hover:opacity-100 transition-opacity">
+                                <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <h3
+                                class="text-xl font-bold font-orbitron text-white mb-2 group-hover:text-green-400 transition-colors">
+                                IOT SMART LAB</h3>
+                            <p class="text-gray-400 text-sm mb-4 flex-grow">Automated inventory tracking and
+                                environmental control for the robotics lab.</p>
+                            <div class="flex items-center justify-between mt-4 border-t border-white/10 pt-4">
+                                <span class="text-xs font-mono text-green-500">STATUS: DEPLOYED</span>
+                                <span class="text-xs text-gray-500">v3.0.1</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Training Section (Flip Cards) -->
+        <section id="training" class="py-20 relative overflow-hidden">
+            <!-- Background Decoration -->
+            <div class="absolute top-0 left-0 w-full h-full overflow-hidden z-0 opacity-20 pointer-events-none">
+                <div
+                    class="absolute top-10 left-10 w-64 h-64 bg-purple-600 rounded-full mix-blend-multiply filter blur-3xl animate-blob">
+                </div>
+                <div
+                    class="absolute top-10 right-10 w-64 h-64 bg-cyan-600 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-2000">
+                </div>
+            </div>
+
+            <div class="container mx-auto px-4 z-10 relative">
+                <div class="flex items-end justify-between mb-12">
+                    <div>
+                        <h2 class="text-3xl md:text-5xl font-bold font-orbitron text-white">TRAINING MODULES</h2>
+                        <p class="text-gray-400 mt-2">Equipping you with the arsenal for the future.</p>
+                    </div>
+                    <div class="hidden md:block text-right">
+                        <p class="font-mono text-cyan-400 text-sm">MODULES_LOADED: 15</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
                     <!-- 3D Printing -->
-                    <div
-                        class="training-card p-4 rounded-lg flex flex-col items-center justify-center text-center h-32">
-                        <svg class="w-10 h-10 mb-2 text-gray-700 training-icon" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10">
-                            </path>
-                        </svg>
-                        <span class="font-semibold text-sm text-gray-800">3D Printing</span>
+                    <div class="flip-card h-40">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front glass-card border border-white/10">
+                                <svg class="w-12 h-12 mb-3 text-cyan-400" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                        d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10">
+                                    </path>
+                                </svg>
+                                <span class="font-bold font-orbitron text-sm text-white">3D PRINTING</span>
+                            </div>
+                            <div class="flip-card-back bg-cyan-900/90 border border-cyan-500/50">
+                                <span class="font-bold text-cyan-300 text-sm">HANDS-ON<br>TRAINING</span>
+                            </div>
+                        </div>
                     </div>
                     <!-- Augmented Reality -->
-                    <div
-                        class="training-card p-4 rounded-lg flex flex-col items-center justify-center text-center h-32">
-                        <svg class="w-10 h-10 mb-2 text-gray-700 training-icon" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
-                            </path>
-                        </svg>
-                        <span class="font-semibold text-sm text-gray-800">Augmented Reality</span>
+                    <div class="flip-card h-40">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front glass-card border border-white/10">
+                                <svg class="w-12 h-12 mb-3 text-purple-400" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                        d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                                    </path>
+                                </svg>
+                                <span class="font-bold font-orbitron text-sm text-white">AR / VR</span>
+                            </div>
+                            <div class="flip-card-back bg-purple-900/90 border border-purple-500/50">
+                                <span class="font-bold text-purple-300 text-sm">IMMERSIVE<br>TECH</span>
+                            </div>
+                        </div>
                     </div>
                     <!-- Blender -->
-                    <div
-                        class="training-card p-4 rounded-lg flex flex-col items-center justify-center text-center h-32">
-                        <svg class="w-10 h-10 mb-2 text-gray-700 training-icon" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5">
-                            </path>
-                        </svg>
-                        <span class="font-semibold text-sm text-gray-800">Blender</span>
+                    <div class="flip-card h-40">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front glass-card border border-white/10">
+                                <svg class="w-12 h-12 mb-3 text-orange-400" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                        d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5">
+                                    </path>
+                                </svg>
+                                <span class="font-bold font-orbitron text-sm text-white">BLENDER</span>
+                            </div>
+                            <div class="flip-card-back bg-orange-900/90 border border-orange-500/50">
+                                <span class="font-bold text-orange-300 text-sm">3D MODELING</span>
+                            </div>
+                        </div>
                     </div>
                     <!-- Drones -->
-                    <div
-                        class="training-card p-4 rounded-lg flex flex-col items-center justify-center text-center h-32">
-                        <svg class="w-10 h-10 mb-2 text-gray-700 training-icon" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
-                        </svg>
-                        <span class="font-semibold text-sm text-gray-800">Drones</span>
+                    <div class="flip-card h-40">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front glass-card border border-white/10">
+                                <svg class="w-12 h-12 mb-3 text-sky-400" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                        d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                                </svg>
+                                <span class="font-bold font-orbitron text-sm text-white">DRONES</span>
+                            </div>
+                            <div class="flip-card-back bg-sky-900/90 border border-sky-500/50">
+                                <span class="font-bold text-sky-300 text-sm">AERIAL<br>ROBOTICS</span>
+                            </div>
+                        </div>
                     </div>
                     <!-- Embedded System -->
-                    <div
-                        class="training-card p-4 rounded-lg flex flex-col items-center justify-center text-center h-32">
-                        <svg class="w-10 h-10 mb-2 text-gray-700 training-icon" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z">
-                            </path>
-                        </svg>
-                        <span class="font-semibold text-sm text-gray-800">Embedded System</span>
+                    <div class="flip-card h-40">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front glass-card border border-white/10">
+                                <svg class="w-12 h-12 mb-3 text-green-400" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                        d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z">
+                                    </path>
+                                </svg>
+                                <span class="font-bold font-orbitron text-sm text-white">EMBEDDED</span>
+                            </div>
+                            <div class="flip-card-back bg-green-900/90 border border-green-500/50">
+                                <span class="font-bold text-green-300 text-sm">HARDWARE<br>LOGIC</span>
+                            </div>
+                        </div>
                     </div>
                     <!-- Image Processing -->
-                    <div
-                        class="training-card p-4 rounded-lg flex flex-col items-center justify-center text-center h-32">
-                        <svg class="w-10 h-10 mb-2 text-gray-700 training-icon" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
-                            </path>
-                        </svg>
-                        <span class="font-semibold text-sm text-gray-800">Image Processing</span>
+                    <div class="flip-card h-40">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front glass-card border border-white/10">
+                                <svg class="w-12 h-12 mb-3 text-pink-400" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                                    </path>
+                                </svg>
+                                <span class="font-bold font-orbitron text-sm text-white">CV / IP</span>
+                            </div>
+                            <div class="flip-card-back bg-pink-900/90 border border-pink-500/50">
+                                <span class="font-bold text-pink-300 text-sm">COMPUTER<br>VISION</span>
+                            </div>
+                        </div>
                     </div>
                     <!-- IoT -->
-                    <div
-                        class="training-card p-4 rounded-lg flex flex-col items-center justify-center text-center h-32">
-                        <svg class="w-10 h-10 mb-2 text-gray-700 training-icon" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0">
-                            </path>
-                        </svg>
-                        <span class="font-semibold text-sm text-gray-800">IoT</span>
+                    <div class="flip-card h-40">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front glass-card border border-white/10">
+                                <svg class="w-12 h-12 mb-3 text-blue-400" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                        d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0">
+                                    </path>
+                                </svg>
+                                <span class="font-bold font-orbitron text-sm text-white">IoT</span>
+                            </div>
+                            <div class="flip-card-back bg-blue-900/90 border border-blue-500/50">
+                                <span class="font-bold text-blue-300 text-sm">CONNECTED<br>DEVICES</span>
+                            </div>
+                        </div>
                     </div>
                     <!-- Machine Learning -->
-                    <div
-                        class="training-card p-4 rounded-lg flex flex-col items-center justify-center text-center h-32">
-                        <svg class="w-10 h-10 mb-2 text-gray-700 training-icon" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z">
-                            </path>
-                        </svg>
-                        <span class="font-semibold text-sm text-gray-800">Machine Learning</span>
+                    <div class="flip-card h-40">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front glass-card border border-white/10">
+                                <svg class="w-12 h-12 mb-3 text-red-400" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                        d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z">
+                                    </path>
+                                </svg>
+                                <span class="font-bold font-orbitron text-sm text-white">ML / AI</span>
+                            </div>
+                            <div class="flip-card-back bg-red-900/90 border border-red-500/50">
+                                <span class="font-bold text-red-300 text-sm">INTELLIGENT<br>SYSTEMS</span>
+                            </div>
+                        </div>
                     </div>
                     <!-- Python -->
-                    <div
-                        class="training-card p-4 rounded-lg flex flex-col items-center justify-center text-center h-32">
-                        <svg class="w-10 h-10 mb-2 text-gray-700 training-icon" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
-                        </svg>
-                        <span class="font-semibold text-sm text-gray-800">Python</span>
+                    <div class="flip-card h-40">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front glass-card border border-white/10">
+                                <svg class="w-12 h-12 mb-3 text-yellow-400" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                        d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                                </svg>
+                                <span class="font-bold font-orbitron text-sm text-white">PYTHON</span>
+                            </div>
+                            <div class="flip-card-back bg-yellow-900/90 border border-yellow-500/50">
+                                <span class="font-bold text-yellow-300 text-sm">CODING<br>CORE</span>
+                            </div>
+                        </div>
                     </div>
                     <!-- ROS 2 -->
-                    <div
-                        class="training-card p-4 rounded-lg flex flex-col items-center justify-center text-center h-32">
-                        <svg class="w-10 h-10 mb-2 text-gray-700 training-icon" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4">
-                            </path>
-                        </svg>
-                        <span class="font-semibold text-sm text-gray-800">ROS 2</span>
+                    <div class="flip-card h-40">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front glass-card border border-white/10">
+                                <svg class="w-12 h-12 mb-3 text-indigo-400" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                        d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4">
+                                    </path>
+                                </svg>
+                                <span class="font-bold font-orbitron text-sm text-white">ROS 2</span>
+                            </div>
+                            <div class="flip-card-back bg-indigo-900/90 border border-indigo-500/50">
+                                <span class="font-bold text-indigo-300 text-sm">ROBOT<br>OS</span>
+                            </div>
+                        </div>
                     </div>
                     <!-- Gazebo -->
-                    <div
-                        class="training-card p-4 rounded-lg flex flex-col items-center justify-center text-center h-32">
-                        <svg class="w-10 h-10 mb-2 text-gray-700 training-icon" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10">
-                            </path>
-                        </svg>
-                        <span class="font-semibold text-sm text-gray-800">Gazebo</span>
+                    <div class="flip-card h-40">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front glass-card border border-white/10">
+                                <svg class="w-12 h-12 mb-3 text-orange-500" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                        d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10">
+                                    </path>
+                                </svg>
+                                <span class="font-bold font-orbitron text-sm text-white">GAZEBO</span>
+                            </div>
+                            <div class="flip-card-back bg-orange-900/90 border border-orange-600/50">
+                                <span class="font-bold text-orange-300 text-sm">SIMULATION</span>
+                            </div>
+                        </div>
                     </div>
                     <!-- FPGA -->
-                    <div
-                        class="training-card p-4 rounded-lg flex flex-col items-center justify-center text-center h-32">
-                        <svg class="w-10 h-10 mb-2 text-gray-700 training-icon" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z">
-                            </path>
-                        </svg>
-                        <span class="font-semibold text-sm text-gray-800">FPGA</span>
+                    <div class="flip-card h-40">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front glass-card border border-white/10">
+                                <svg class="w-12 h-12 mb-3 text-teal-400" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                        d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z">
+                                    </path>
+                                </svg>
+                                <span class="font-bold font-orbitron text-sm text-white">FPGA</span>
+                            </div>
+                            <div class="flip-card-back bg-teal-900/90 border border-teal-500/50">
+                                <span class="font-bold text-teal-300 text-sm">LOGIC<br>GATES</span>
+                            </div>
+                        </div>
                     </div>
                     <!-- Multi Terrain Vehicle Robots -->
-                    <div
-                        class="training-card p-4 rounded-lg flex flex-col items-center justify-center text-center h-32">
-                        <svg class="w-10 h-10 mb-2 text-gray-700 training-icon" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                        </svg>
-                        <span class="font-semibold text-sm text-gray-800">Multi Terrain Robots</span>
+                    <div class="flip-card h-40">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front glass-card border border-white/10">
+                                <svg class="w-12 h-12 mb-3 text-lime-400" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                        d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                </svg>
+                                <span class="font-bold font-orbitron text-sm text-white">MTV ROBOTS</span>
+                            </div>
+                            <div class="flip-card-back bg-lime-900/90 border border-lime-500/50">
+                                <span class="font-bold text-lime-300 text-sm">ALL<br>TERRAIN</span>
+                            </div>
+                        </div>
                     </div>
                     <!-- CoppeliaSim -->
-                    <div
-                        class="training-card p-4 rounded-lg flex flex-col items-center justify-center text-center h-32">
-                        <svg class="w-10 h-10 mb-2 text-gray-700 training-icon" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5">
-                            </path>
-                        </svg>
-                        <span class="font-semibold text-sm text-gray-800">CoppeliaSim</span>
+                    <div class="flip-card h-40">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front glass-card border border-white/10">
+                                <svg class="w-12 h-12 mb-3 text-violet-400" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                        d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5">
+                                    </path>
+                                </svg>
+                                <span class="font-bold font-orbitron text-sm text-white">COPPELIA</span>
+                            </div>
+                            <div class="flip-card-back bg-violet-900/90 border border-violet-500/50">
+                                <span class="font-bold text-violet-300 text-sm">ROBOT<br>SIM</span>
+                            </div>
+                        </div>
                     </div>
                     <!-- STM32 -->
+                    <div class="flip-card h-40">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front glass-card border border-white/10">
+                                <svg class="w-12 h-12 mb-3 text-blue-500" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                        d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z">
+                                    </path>
+                                </svg>
+                                <span class="font-bold font-orbitron text-sm text-white">STM32</span>
+                            </div>
+                            <div class="flip-card-back bg-blue-900/90 border border-blue-600/50">
+                                <span class="font-bold text-blue-300 text-sm">MICRO<br>CONTROLLER</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team Section -->
+        <section id="team" class="py-20 bg-slate-900/50">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-5xl font-bold font-orbitron text-white mb-4">CORE TEAM</h2>
+                    <p class="text-gray-400">The minds behind the machines.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Member 1 -->
+                    <div class="glass-card p-6 rounded-xl text-center group hover:border-cyan-400/50 transition-colors">
+                        <div class="relative w-32 h-32 mx-auto mb-4">
+                            <div
+                                class="absolute inset-0 bg-cyan-500 rounded-full blur opacity-20 group-hover:opacity-50 transition-opacity">
+                            </div>
+                            <img class="relative w-full h-full rounded-full border-2 border-cyan-400 object-cover"
+                                src="https://placehold.co/200x200/1e293b/06b6d4?text=AC" alt="Alex Chen">
+                        </div>
+                        <h3 class="text-xl font-bold font-orbitron text-white">ALEX CHEN</h3>
+                        <p class="text-cyan-400 text-sm font-mono mb-2">FOUNDER & LEAD</p>
+                        <p class="text-gray-500 text-xs italic">"Building the future."</p>
+                    </div>
+
+                    <!-- Member 2 -->
                     <div
-                        class="training-card p-4 rounded-lg flex flex-col items-center justify-center text-center h-32">
-                        <svg class="w-10 h-10 mb-2 text-gray-700 training-icon" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z">
-                            </path>
-                        </svg>
-                        <span class="font-semibold text-sm text-gray-800">STM32</span>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Team Section -->
-            <section id="team" class="card mt-8 p-6 md:p-8">
-                <h2 class="text-3xl font-bold text-center mb-8">Our Team</h2>
-
-                <!-- Founder Section -->
-                <div class="mb-12">
-                    <div class="flex flex-wrap justify-center gap-10 md:gap-16">
-                        <!-- Founder Profile -->
-                        <div class="text-center">
-                            <div class="relative group mx-auto w-32 h-32">
-                                <img class="w-32 h-32 rounded-full shadow-lg border-4 border-red-500"
-                                    src="https://placehold.co/200x200/d1d5db/374151?text=AC" alt="Founder Alex Chen">
-                                <div
-                                    class="absolute inset-0 bg-black bg-opacity-70 flex items-center justify-center p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                    <p class="text-white text-xs text-center italic">"Let's build the future, one robot
-                                        at a time. Proud of what this club has become."</p>
-                                </div>
+                        class="glass-card p-6 rounded-xl text-center group hover:border-purple-400/50 transition-colors">
+                        <div class="relative w-32 h-32 mx-auto mb-4">
+                            <div
+                                class="absolute inset-0 bg-purple-500 rounded-full blur opacity-20 group-hover:opacity-50 transition-opacity">
                             </div>
-                            <h3 class="mt-4 text-xl font-semibold text-gray-800">Alex Chen</h3>
-                            <p class="text-gray-600 font-medium">Founder</p>
+                            <img class="relative w-full h-full rounded-full border-2 border-purple-400 object-cover"
+                                src="https://placehold.co/200x200/1e293b/a855f7?text=ER" alt="Dr. Evelyn Reed">
                         </div>
+                        <h3 class="text-xl font-bold font-orbitron text-white">DR. EVELYN REED</h3>
+                        <p class="text-purple-400 text-sm font-mono mb-2">FACULTY MENTOR</p>
+                        <p class="text-gray-500 text-xs italic">"Guiding innovation."</p>
+                    </div>
+
+                    <!-- Member 3 -->
+                    <div
+                        class="glass-card p-6 rounded-xl text-center group hover:border-green-400/50 transition-colors">
+                        <div class="relative w-32 h-32 mx-auto mb-4">
+                            <div
+                                class="absolute inset-0 bg-green-500 rounded-full blur opacity-20 group-hover:opacity-50 transition-opacity">
+                            </div>
+                            <img class="relative w-full h-full rounded-full border-2 border-green-400 object-cover"
+                                src="https://placehold.co/200x200/1e293b/22c55e?text=BC" alt="Ben Carter">
+                        </div>
+                        <h3 class="text-xl font-bold font-orbitron text-white">BEN CARTER</h3>
+                        <p class="text-green-400 text-sm font-mono mb-2">SOFTWARE LEAD</p>
+                        <p class="text-gray-500 text-xs italic">"Code is law."</p>
+                    </div>
+
+                    <!-- Member 4 -->
+                    <div class="glass-card p-6 rounded-xl text-center group hover:border-pink-400/50 transition-colors">
+                        <div class="relative w-32 h-32 mx-auto mb-4">
+                            <div
+                                class="absolute inset-0 bg-pink-500 rounded-full blur opacity-20 group-hover:opacity-50 transition-opacity">
+                            </div>
+                            <img class="relative w-full h-full rounded-full border-2 border-pink-400 object-cover"
+                                src="https://placehold.co/200x200/1e293b/ec4899?text=PS" alt="Priya Singh">
+                        </div>
+                        <h3 class="text-xl font-bold font-orbitron text-white">PRIYA SINGH</h3>
+                        <p class="text-pink-400 text-sm font-mono mb-2">HARDWARE LEAD</p>
+                        <p class="text-gray-500 text-xs italic">"Hardware is hard."</p>
                     </div>
                 </div>
+            </div>
+        </section>
 
-                <!-- Faculty Mentor Section -->
-                <div class="mb-12 py-8 md:flex md:items-center md:gap-8 border-t border-b border-gray-200">
-                    <img class="w-32 h-32 mx-auto md:mx-0 rounded-full shadow-lg border-4 border-blue-500 flex-shrink-0"
-                        src="https://placehold.co/200x200/d1d5db/374151?text=ER" alt="Mentor Dr. Evelyn Reed">
-                    <div class="mt-4 md:mt-0 text-center md:text-left">
-                        <h3 class="text-2xl font-bold text-gray-800">Dr. Evelyn Reed</h3>
-                        <p class="text-blue-600 font-semibold">Faculty Mentor</p>
-                        <blockquote class="text-gray-600 mt-2 italic relative">
-                            <p>"Guiding these bright students is a privilege. Their passion for innovation is truly
-                                inspiring and pushes the boundaries of what's possible."</p>
-                        </blockquote>
-                    </div>
-                </div>
-
-                <!-- Department Members Section -->
-                <div class="space-y-10">
-                    <!-- Software Department -->
-                    <div>
-                        <h3 class="text-2xl font-bold text-gray-800 mb-6 border-l-4 border-red-500 pl-4">Software
-                            Department</h3>
-                        <div class="flex flex-wrap justify-center gap-x-6 gap-y-8">
-                            <!-- Members -->
-                            <div class="text-center w-40">
-                                <div class="relative group mx-auto w-24 h-24">
-                                    <img class="w-full h-full rounded-full shadow-md"
-                                        src="https://placehold.co/200x200/d1d5db/374151?text=BC" alt="Ben Carter">
-                                    <div
-                                        class="absolute inset-0 bg-black bg-opacity-70 flex items-center justify-center p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                        <p class="text-white text-xs text-center italic">"I love tackling complex
-                                            algorithms and making our robots smart."</p>
-                                    </div>
-                                </div>
-                                <h4 class="mt-3 font-semibold text-gray-800">Ben Carter</h4>
-                                <p class="text-sm text-gray-500">Software Lead</p>
+        <!-- Dynamic Gallery Section -->
+        <section id="gallery" class="py-20 overflow-hidden">
+            <div class="container mx-auto px-4 mb-10 text-center">
+                <h2 class="text-3xl font-bold font-orbitron text-white">EVENT LOGS</h2>
+            </div>
+            <div class="marquee py-4">
+                <div class="marquee-content space-x-6 px-3">
+                    <!-- Gallery Items (Repeated for Marquee) -->
+                    <div class="gallery-item w-80 md:w-96 flex-shrink-0 cursor-pointer group">
+                        <div class="overflow-hidden rounded-lg border border-white/10 relative">
+                            <div
+                                class="absolute inset-0 bg-cyan-500/20 opacity-0 group-hover:opacity-100 transition-opacity z-10">
                             </div>
-                            <div class="text-center w-40">
-                                <div class="relative group mx-auto w-24 h-24">
-                                    <img class="w-full h-full rounded-full shadow-md"
-                                        src="https://placehold.co/200x200/d1d5db/374151?text=SJ" alt="Sarah Jones">
-                                    <div
-                                        class="absolute inset-0 bg-black bg-opacity-70 flex items-center justify-center p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                        <p class="text-white text-xs text-center italic">"Working on perception systems
-                                            is my passion. It's cool to help robots 'see'."</p>
-                                    </div>
-                                </div>
-                                <h4 class="mt-3 font-semibold text-gray-800">Sarah Jones</h4>
-                                <p class="text-sm text-gray-500">Member</p>
-                            </div>
-                            <div class="text-center w-40">
-                                <div class="relative group mx-auto w-24 h-24">
-                                    <img class="w-full h-full rounded-full shadow-md"
-                                        src="https://placehold.co/200x200/d1d5db/374151?text=KL" alt="Kevin Lee">
-                                    <div
-                                        class="absolute inset-0 bg-black bg-opacity-70 flex items-center justify-center p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                        <p class="text-white text-xs text-center italic">"The challenge of optimizing
-                                            code for real-time performance is exciting."</p>
-                                    </div>
-                                </div>
-                                <h4 class="mt-3 font-semibold text-gray-800">Kevin Lee</h4>
-                                <p class="text-sm text-gray-500">Member</p>
+                            <img src="https://images.unsplash.com/photo-1531746790733-2488c0672045?q=80&w=2070&auto-format&fit=crop"
+                                alt="Workshop"
+                                class="w-full h-56 object-cover grayscale group-hover:grayscale-0 transition-all duration-500">
+                            <div
+                                class="absolute bottom-0 left-0 right-0 p-4 bg-black/80 backdrop-blur-sm border-t border-white/10">
+                                <h3 class="font-bold font-orbitron text-white text-sm">KICK-OFF WORKSHOP</h3>
+                                <p class="text-xs text-cyan-400 font-mono">DATE: 2025-10-15</p>
                             </div>
                         </div>
                     </div>
-                    <!-- Hardware Department -->
-                    <div>
-                        <h3 class="text-2xl font-bold text-gray-800 mb-6 border-l-4 border-red-500 pl-4">Hardware
-                            Department</h3>
-                        <div class="flex flex-wrap justify-center gap-x-6 gap-y-8">
-                            <!-- Members -->
-                            <div class="text-center w-40">
-                                <div class="relative group mx-auto w-24 h-24">
-                                    <img class="w-full h-full rounded-full shadow-md"
-                                        src="https://placehold.co/200x200/d1d5db/374151?text=PS" alt="Priya Singh">
-                                    <div
-                                        class="absolute inset-0 bg-black bg-opacity-70 flex items-center justify-center p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                        <p class="text-white text-xs text-center italic">"From CAD designs to final
-                                            assembly, I love seeing our ideas take physical form."</p>
-                                    </div>
-                                </div>
-                                <h4 class="mt-3 font-semibold text-gray-800">Priya Singh</h4>
-                                <p class="text-sm text-gray-500">Hardware Lead</p>
+                    <!-- More items would go here, simplified for brevity -->
+                    <div class="gallery-item w-80 md:w-96 flex-shrink-0 cursor-pointer group">
+                        <div class="overflow-hidden rounded-lg border border-white/10 relative">
+                            <div
+                                class="absolute inset-0 bg-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity z-10">
                             </div>
-                            <div class="text-center w-40">
-                                <div class="relative group mx-auto w-24 h-24">
-                                    <img class="w-full h-full rounded-full shadow-md"
-                                        src="https://placehold.co/200x200/d1d5db/374151?text=MG" alt="Maria Garcia">
-                                    <div
-                                        class="absolute inset-0 bg-black bg-opacity-70 flex items-center justify-center p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                        <p class="text-white text-xs text-center italic">"Wiring complex circuit boards
-                                            is like solving a puzzle. It's very satisfying."</p>
-                                    </div>
-                                </div>
-                                <h4 class="mt-3 font-semibold text-gray-800">Maria Garcia</h4>
-                                <p class="text-sm text-gray-500">Member</p>
+                            <img src="https://images.unsplash.com/photo-1606663889134-b1dedb548b08?q=80&w=2070&auto-format&fit=crop"
+                                alt="RoboCup"
+                                class="w-full h-56 object-cover grayscale group-hover:grayscale-0 transition-all duration-500">
+                            <div
+                                class="absolute bottom-0 left-0 right-0 p-4 bg-black/80 backdrop-blur-sm border-t border-white/10">
+                                <h3 class="font-bold font-orbitron text-white text-sm">ROBOCUP PRACTICE</h3>
+                                <p class="text-xs text-purple-400 font-mono">DATE: 2025-09-20</p>
                             </div>
-                            <div class="text-center w-40">
-                                <div class="relative group mx-auto w-24 h-24">
-                                    <img class="w-full h-full rounded-full shadow-md"
-                                        src="https://placehold.co/200x200/d1d5db/374151?text=DW" alt="David Wang">
-                                    <div
-                                        class="absolute inset-0 bg-black bg-opacity-70 flex items-center justify-center p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                        <p class="text-white text-xs text-center italic">"3D printing prototypes is the
-                                            best part. We can test ideas so quickly."</p>
-                                    </div>
-                                </div>
-                                <h4 class="mt-3 font-semibold text-gray-800">David Wang</h4>
-                                <p class="text-sm text-gray-500">Member</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item w-80 md:w-96 flex-shrink-0 cursor-pointer group">
+                        <div class="overflow-hidden rounded-lg border border-white/10 relative">
+                            <div
+                                class="absolute inset-0 bg-green-500/20 opacity-0 group-hover:opacity-100 transition-opacity z-10">
                             </div>
-                            <div class="text-center w-40">
-                                <div class="relative group mx-auto w-24 h-24">
-                                    <img class="w-full h-full rounded-full shadow-md"
-                                        src="https://placehold.co/200x200/d1d5db/374151?text=CH" alt="Chloe Harris">
-                                    <div
-                                        class="absolute inset-0 bg-black bg-opacity-70 flex items-center justify-center p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                        <p class="text-white text-xs text-center italic">"Working with sensors and
-                                            actuators to make the robot move is awesome."</p>
-                                    </div>
-                                </div>
-                                <h4 class="mt-3 font-semibold text-gray-800">Chloe Harris</h4>
-                                <p class="text-sm text-gray-500">Member</p>
+                            <img src="https://images.unsplash.com/photo-1581092580497-c2d29cb5f324?q=80&w=2070&auto-format&fit=crop"
+                                alt="Drone"
+                                class="w-full h-56 object-cover grayscale group-hover:grayscale-0 transition-all duration-500">
+                            <div
+                                class="absolute bottom-0 left-0 right-0 p-4 bg-black/80 backdrop-blur-sm border-t border-white/10">
+                                <h3 class="font-bold font-orbitron text-white text-sm">DRONE TESTING</h3>
+                                <p class="text-xs text-green-400 font-mono">DATE: 2025-09-10</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Duplicates for marquee -->
+                    <div class="gallery-item w-80 md:w-96 flex-shrink-0 cursor-pointer group">
+                        <div class="overflow-hidden rounded-lg border border-white/10 relative">
+                            <div
+                                class="absolute inset-0 bg-cyan-500/20 opacity-0 group-hover:opacity-100 transition-opacity z-10">
+                            </div>
+                            <img src="https://images.unsplash.com/photo-1531746790733-2488c0672045?q=80&w=2070&auto-format&fit=crop"
+                                alt="Workshop"
+                                class="w-full h-56 object-cover grayscale group-hover:grayscale-0 transition-all duration-500">
+                            <div
+                                class="absolute bottom-0 left-0 right-0 p-4 bg-black/80 backdrop-blur-sm border-t border-white/10">
+                                <h3 class="font-bold font-orbitron text-white text-sm">KICK-OFF WORKSHOP</h3>
+                                <p class="text-xs text-cyan-400 font-mono">DATE: 2025-10-15</p>
                             </div>
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <!-- Dynamic Gallery Section -->
-            <section id="gallery" class="card mt-8 overflow-hidden">
-                <div class="p-6 md:p-8">
-                    <h2 class="text-3xl font-bold text-center mb-4">Event Gallery</h2>
-                </div>
-                <div class="marquee py-4">
-                    <div class="marquee-content space-x-6 px-3">
-                        <!-- We duplicate the items to create a seamless loop -->
-                        <!-- Original Items -->
-                        <div class="gallery-item w-80 md:w-96 flex-shrink-0 cursor-pointer">
-                            <div class="overflow-hidden rounded-lg shadow-md">
-                                <img src="https://images.unsplash.com/photo-1531746790733-2488c0672045?q=80&w=2070&auto-format&fit=crop"
-                                    alt="Students collaborating on a robotics project" class="w-full gallery-img">
-                                <div class="p-4 bg-white">
-                                    <h3 class="font-semibold">Fall Kick-off Workshop</h3>
-                                    <p class="text-sm text-gray-500">October 2025</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="gallery-item w-80 md:w-96 flex-shrink-0 cursor-pointer">
-                            <div class="overflow-hidden rounded-lg shadow-md">
-                                <img src="https://images.unsplash.com/photo-1606663889134-b1dedb548b08?q=80&w=2070&auto-format&fit=crop"
-                                    alt="Close-up of a robot arm" class="w-full gallery-img">
-                                <div class="p-4 bg-white">
-                                    <h3 class="font-semibold">RoboCup Team Practice</h3>
-                                    <p class="text-sm text-gray-500">September 2025</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="gallery-item w-80 md:w-96 flex-shrink-0 cursor-pointer">
-                            <div class="overflow-hidden rounded-lg shadow-md">
-                                <img src="https://images.unsplash.com/photo-1581092580497-c2d29cb5f324?q=80&w=2070&auto-format&fit=crop"
-                                    alt="Team members testing a drone" class="w-full gallery-img">
-                                <div class="p-4 bg-white">
-                                    <h3 class="font-semibold">Drone Stability Testing</h3>
-                                    <p class="text-sm text-gray-500">September 2025</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Duplicated Items -->
-                        <div class="gallery-item w-80 md:w-96 flex-shrink-0 cursor-pointer">
-                            <div class="overflow-hidden rounded-lg shadow-md">
-                                <img src="https://images.unsplash.com/photo-1531746790733-2488c0672045?q=80&w=2070&auto-format&fit=crop"
-                                    alt="Students collaborating on a robotics project" class="w-full gallery-img">
-                                <div class="p-4 bg-white">
-                                    <h3 class="font-semibold">Fall Kick-off Workshop</h3>
-                                    <p class="text-sm text-gray-500">October 2025</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="gallery-item w-80 md:w-96 flex-shrink-0 cursor-pointer">
-                            <div class="overflow-hidden rounded-lg shadow-md">
-                                <img src="https://images.unsplash.com/photo-1606663889134-b1dedb548b08?q=80&w=2070&auto-format&fit=crop"
-                                    alt="Close-up of a robot arm" class="w-full gallery-img">
-                                <div class="p-4 bg-white">
-                                    <h3 class="font-semibold">RoboCup Team Practice</h3>
-                                    <p class="text-sm text-gray-500">September 2025</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="gallery-item w-80 md:w-96 flex-shrink-0 cursor-pointer">
-                            <div class="overflow-hidden rounded-lg shadow-md">
-                                <img src="https://images.unsplash.com/photo-1581092580497-c2d29cb5f324?q=80&w=2070&auto-format&fit=crop"
-                                    alt="Team members testing a drone" class="w-full gallery-img">
-                                <div class="p-4 bg-white">
-                                    <h3 class="font-semibold">Drone Stability Testing</h3>
-                                    <p class="text-sm text-gray-500">September 2025</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-        </div>
     </main>
 
     <!-- Footer -->
-    <footer class="header-bg text-white mt-8">
-        <div class="container mx-auto px-6 py-8 text-center">
-            <h3 class="text-xl font-bold mb-2">Get In Touch</h3>
-            <p class="text-gray-300 mb-4">contact@roboticsclub.edu</p>
-
-            <!-- Socials Section -->
-            <div class="flex justify-center space-x-6 mb-6">
-                <!-- LinkedIn -->
-                <a href="#" aria-label="LinkedIn"
-                    class="text-gray-400 hover:text-sky-400 transform hover:scale-110 transition-all duration-300">
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+    <footer class="border-t border-white/10 bg-slate-900 pt-16 pb-8">
+        <div class="container mx-auto px-4 text-center">
+            <h3 class="text-2xl font-bold font-orbitron text-white mb-6">CONNECT WITH US</h3>
+            <div class="flex justify-center space-x-8 mb-8">
+                <a href="#" class="text-gray-400 hover:text-cyan-400 transition-colors transform hover:scale-110">
+                    <span class="sr-only">LinkedIn</span>
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
                         <path
                             d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
                     </svg>
                 </a>
-                <!-- Instagram -->
-                <a href="#" aria-label="Instagram"
-                    class="text-gray-400 hover:text-sky-400 transform hover:scale-110 transition-all duration-300">
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <a href="#" class="text-gray-400 hover:text-purple-400 transition-colors transform hover:scale-110">
+                    <span class="sr-only">Instagram</span>
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
                         <path
                             d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.012 3.584-.07 4.85c-.148 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.069-4.85.069s-3.584-.012-4.85-.07c-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.069-1.645-.069-4.85s.012-3.584.07-4.85c.148-3.225 1.664-4.771 4.919-4.919 1.266-.058 1.644-.069 4.85-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072s3.667-.014 4.947-.072c4.358-.2 6.78-2.618 6.98-6.98.059-1.281.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.2-4.358-2.618-6.78-6.98-6.98-1.281-.059-1.689-.073-4.948-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.441 1.441 1.441 1.441-.645 1.441-1.441-.645-1.44-1.441-1.44z" />
                     </svg>
                 </a>
-                <!-- Outlook Mail -->
-                <a href="mailto:contact@roboticsclub.edu" aria-label="Email"
-                    class="text-gray-400 hover:text-sky-400 transform hover:scale-110 transition-all duration-300">
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <a href="mailto:contact@roboticsclub.edu"
+                    class="text-gray-400 hover:text-blue-400 transition-colors transform hover:scale-110">
+                    <span class="sr-only">Email</span>
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
                         <path
                             d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z" />
                     </svg>
                 </a>
             </div>
-
-            <p class="text-gray-400 text-sm">&copy; 2025 Robotics Club. All Rights Reserved.</p>
+            <p class="text-gray-600 text-sm font-mono">&copy; 2025 ROBOTICS CLUB. SYSTEM STATUS: ONLINE.</p>
         </div>
     </footer>
 
     <!-- The Modal -->
     <div id="galleryModal" class="modal-overlay">
-        <div class="modal-content">
-            <span id="closeModal" class="modal-close">&times;</span>
+        <div class="modal-content glass-card border border-white/20">
+            <span id="closeModal" class="modal-close text-white hover:text-cyan-400">&times;</span>
             <img id="modalImage" src="" alt="Event image"
-                class="w-full h-auto max-h-[70vh] object-contain rounded-lg mb-4">
-            <h3 id="modalTitle" class="text-2xl font-bold text-gray-900"></h3>
-            <p id="modalDate" class="text-md text-gray-500"></p>
+                class="w-full h-auto max-h-[70vh] object-contain rounded-lg mb-4 border border-white/10">
+            <h3 id="modalTitle" class="text-2xl font-bold font-orbitron text-white"></h3>
+            <p id="modalDate" class="text-md text-cyan-400 font-mono"></p>
         </div>
     </div>
 

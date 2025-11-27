@@ -59,86 +59,154 @@ body {
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 }
 
-/* --- Glitch Text Effect --- */
-.glitch-text {
+/* --- Typewriter Animation --- */
+.typewriter-container {
     position: relative;
     color: white;
+    min-height: 240px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-.glitch-text::before,
-.glitch-text::after {
+.typewriter-line {
+    position: relative;
+    display: block;
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    white-space: nowrap;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: 1.2;
+    margin: 0;
+    width: 100%;
+    text-align: center;
+}
+
+.typewriter-line.active {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.typewriter-line.typing::after {
+    content: '|';
+    display: inline-block;
+    margin-left: 8px;
+    animation: blink-cursor 1s infinite;
+    color: var(--color-cyan);
+    font-weight: 300;
+}
+
+.typewriter-line.erasing::after {
+    content: '|';
+    display: inline-block;
+    margin-left: 8px;
+    animation: blink-cursor 0.5s infinite;
+    color: var(--color-cyan);
+    font-weight: 300;
+}
+
+@keyframes blink-cursor {
+    0%, 50% {
+        opacity: 1;
+    }
+
+    51%, 100% {
+        opacity: 0;
+    }
+}
+
+/* Gradient text for third line of both sets (INSPIRE. and CONQUER.) */
+.typewriter-line.gradient-text {
+    background: linear-gradient(to right, #06b6d4, #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+}
+
+/* Glitch effect during erase transition */
+.typewriter-container.glitch-erase .typewriter-line {
+    position: relative;
+    animation: glitch-erase-shake 0.15s infinite;
+}
+
+.typewriter-container.glitch-erase .typewriter-line::before,
+.typewriter-container.glitch-erase .typewriter-line::after {
     content: attr(data-text);
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: var(--color-bg);
+    background: transparent;
+    pointer-events: none;
+    opacity: 0.8;
 }
 
-.glitch-text::before {
+.typewriter-container.glitch-erase .typewriter-line::before {
     left: 2px;
-    text-shadow: -1px 0 #ff00c1;
-    clip: rect(44px, 450px, 56px, 0);
-    animation: glitch-anim 8s infinite linear alternate-reverse;
+    color: #ff00c1;
+    text-shadow: -2px 0 #ff00c1;
+    clip-path: inset(0 0 50% 0);
+    animation: glitch-clip-before 0.15s infinite;
 }
 
-.glitch-text::after {
+.typewriter-container.glitch-erase .typewriter-line::after {
     left: -2px;
-    text-shadow: -1px 0 #00fff9;
-    clip: rect(44px, 450px, 56px, 0);
-    animation: glitch-anim2 8s infinite linear alternate-reverse;
+    color: #00fff9;
+    text-shadow: 2px 0 #00fff9;
+    clip-path: inset(50% 0 0 0);
+    animation: glitch-clip-after 0.15s infinite;
 }
 
-@keyframes glitch-anim {
-    0% {
-        clip: rect(38px, 9999px, 81px, 0);
+@keyframes glitch-erase-shake {
+    0%, 100% {
+        transform: translateX(0);
     }
-
     20% {
-        clip: rect(6px, 9999px, 9px, 0);
+        transform: translateX(-1px);
     }
-
     40% {
-        clip: rect(59px, 9999px, 16px, 0);
+        transform: translateX(1px);
     }
-
     60% {
-        clip: rect(18px, 9999px, 86px, 0);
+        transform: translateX(-0.5px);
     }
-
     80% {
-        clip: rect(74px, 9999px, 21px, 0);
-    }
-
-    100% {
-        clip: rect(12px, 9999px, 64px, 0);
+        transform: translateX(0.5px);
     }
 }
 
-@keyframes glitch-anim2 {
-    0% {
-        clip: rect(65px, 9999px, 96px, 0);
+@keyframes glitch-clip-before {
+    0%, 100% {
+        clip-path: inset(0 0 50% 0);
     }
-
-    20% {
-        clip: rect(15px, 9999px, 4px, 0);
+    25% {
+        clip-path: inset(10% 0 40% 0);
     }
-
-    40% {
-        clip: rect(8px, 9999px, 32px, 0);
+    50% {
+        clip-path: inset(20% 0 30% 0);
     }
-
-    60% {
-        clip: rect(3px, 9999px, 75px, 0);
+    75% {
+        clip-path: inset(30% 0 20% 0);
     }
+}
 
-    80% {
-        clip: rect(92px, 9999px, 48px, 0);
+@keyframes glitch-clip-after {
+    0%, 100% {
+        clip-path: inset(50% 0 0 0);
     }
-
-    100% {
-        clip: rect(51px, 9999px, 14px, 0);
+    25% {
+        clip-path: inset(40% 0 10% 0);
+    }
+    50% {
+        clip-path: inset(30% 0 20% 0);
+    }
+    75% {
+        clip-path: inset(20% 0 30% 0);
     }
 }
 

@@ -39,10 +39,10 @@ body {
     width: 50%;
     height: 100%;
     position: relative;
-    background-image: url('https://images.unsplash.com/photo-1535378437327-b7102b656ece?q=80&w=2000&auto-format&fit=crop');
-    /* Robot/AI Image */
+    background-image: url('media/robotics-side.png');
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
     display: flex;
     align-items: center;
     justify-content: center;

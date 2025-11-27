@@ -3,12 +3,12 @@
 // --- Firebase Configuration ---
 // TODO: Replace with your actual Firebase project config
 const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_PROJECT_ID.appspot.com",
-    messagingSenderId: "YOUR_SENDER_ID",
-    appId: "YOUR_APP_ID"
+    apiKey: "AIzaSyCceJVl6uUtRZezaudfJLmkFGVQ2NZVHcU",
+    authDomain: "robotics-club-app.firebaseapp.com",
+    projectId: "robotics-club-app",
+    storageBucket: "robotics-club-app.firebasestorage.app",
+    messagingSenderId: "472852004746",
+    appId: "1:472852004746:web:5d74e0e1298970a7ad5273"
 };
 
 // Initialize Firebase (Try/Catch to handle missing config gracefully)

@@ -188,10 +188,10 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             // Finished typing this line
             lineElement.classList.remove('typing');
-            
+
             // Move to next line
             currentLine++;
-            
+
             if (currentLine < taglineSet.length) {
                 // More lines to type
                 setTimeout(typeText, 300);
@@ -207,15 +207,15 @@ document.addEventListener('DOMContentLoaded', () => {
     function eraseAllLines() {
         const taglineSet = getCurrentTaglineSet();
         let allErased = true;
-        
+
         // Add glitch effect to container
         const container = document.querySelector('.typewriter-container');
         container.classList.add('glitch-erase');
-        
+
         // Erase all three lines simultaneously
         for (let i = 0; i < 3; i++) {
             const lineElement = getLineElement(i);
-            
+
             if (currentTexts[i].length > 0) {
                 currentTexts[i] = currentTexts[i].substring(0, currentTexts[i].length - 1);
                 lineElement.textContent = currentTexts[i];
@@ -224,7 +224,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 allErased = false;
             }
         }
-        
+
         if (!allErased) {
             setTimeout(eraseAllLines, erasingSpeed);
         } else {
@@ -233,15 +233,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 const lineElement = getLineElement(i);
                 lineElement.classList.remove('erasing', 'active', 'gradient-text');
             }
-            
+
             // Remove glitch effect
             container.classList.remove('glitch-erase');
-            
+
             // Switch to next set
             currentLine = 0;
             currentSet = currentSet === 1 ? 2 : 1;
             currentTexts = ['', '', ''];
-            
+
             setTimeout(() => {
                 typeText();
             }, pauseAfterErasing);
@@ -254,7 +254,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 500); // Initial delay
 
     /* --- Gallery Modal openModal function (for onclick handlers) --- */
-    window.openModal = function(imageSrc, title, date) {
+    window.openModal = function (imageSrc, title, date) {
         if (galleryModal && modalImage && modalTitle && modalDate) {
             modalImage.src = imageSrc;
             modalTitle.innerText = title;
@@ -263,4 +263,25 @@ document.addEventListener('DOMContentLoaded', () => {
             document.body.style.overflow = 'hidden';
         }
     };
+
+    /* --- Mobile Menu Logic --- */
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const navLinks = document.querySelector('.md\\:flex'); // Select the desktop menu container
+
+    if (mobileMenuButton && navLinks) {
+        mobileMenuButton.addEventListener('click', () => {
+            // Toggle visibility classes
+            navLinks.classList.toggle('hidden');
+            navLinks.classList.toggle('flex');
+            navLinks.classList.toggle('flex-col');
+            navLinks.classList.toggle('absolute');
+            navLinks.classList.toggle('top-16');
+            navLinks.classList.toggle('left-0');
+            navLinks.classList.toggle('w-full');
+            navLinks.classList.toggle('bg-slate-900/95');
+            navLinks.classList.toggle('p-6');
+            navLinks.classList.toggle('border-b');
+            navLinks.classList.toggle('border-cyan-500/30');
+        });
+    }
 });

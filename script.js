@@ -269,11 +269,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const navLinks = document.getElementById('nav-links');
 
     if (mobileMenuButton && navLinks) {
-        mobileMenuButton.addEventListener('click', () => {
-            // Toggle visibility classes
+        const toggleMenu = () => {
             navLinks.classList.toggle('hidden');
-
-            // Add mobile specific styling
             navLinks.classList.toggle('flex');
             navLinks.classList.toggle('flex-col');
             navLinks.classList.toggle('absolute');
@@ -286,7 +283,19 @@ document.addEventListener('DOMContentLoaded', () => {
             navLinks.classList.toggle('border-cyan-500/30');
             navLinks.classList.toggle('space-y-4');
 
-            // Note: md: classes in HTML handle the desktop reset automatically
+            const isMenuOpen = !navLinks.classList.contains('hidden');
+            mobileMenuButton.setAttribute('aria-expanded', isMenuOpen ? 'true' : 'false');
+        };
+
+        mobileMenuButton.addEventListener('click', toggleMenu);
+
+        // Close menu when a nav link is selected (mobile)
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth < 768 && !navLinks.classList.contains('hidden')) {
+                    toggleMenu();
+                }
+            });
         });
     }
 });

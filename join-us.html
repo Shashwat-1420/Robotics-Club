@@ -1,16 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Join Robotics Club | Apply Now</title>
-    <link rel="stylesheet" href="join-style.css">
-    <!-- Firebase SDKs -->
-    <script type="module" src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
-    <script type="module" src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"></script>
-</head>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,9 +8,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join Robotics Club | Apply Now</title>
     <link rel="stylesheet" href="join-style.css">
-    <!-- Firebase SDKs -->
-    <script type="module" src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
-    <script type="module" src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"></script>
+    <!-- Firebase SDKs (Compat for file:// usage) -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
 </head>
 
 <body>
@@ -59,7 +48,7 @@
                         <input type="text" id="name" placeholder="Type your answer here..." autocomplete="off">
                         <div class="error-msg" id="error-name">Please enter your name</div>
                         <div class="nav-buttons">
-                            <button class="btn-next" onclick="nextStep()">OK ✓</button>
+                            <button type="button" class="btn-next" onclick="nextStep()">OK ✓</button>
                             <span class="press-enter">press <strong>Enter ↵</strong></span>
                         </div>
                     </div>
@@ -72,8 +61,8 @@
                         <input type="email" id="email" placeholder="name@college.edu" autocomplete="off">
                         <div class="error-msg" id="error-email">Please enter a valid email</div>
                         <div class="nav-buttons">
-                            <button class="btn-next" onclick="nextStep()">OK ✓</button>
-                            <button class="btn-prev" onclick="prevStep()">BACK</button>
+                            <button type="button" class="btn-next" onclick="nextStep()">OK ✓</button>
+                            <button type="button" class="btn-prev" onclick="prevStep()">BACK</button>
                         </div>
                     </div>
 
@@ -105,7 +94,7 @@
                         </div>
                         <div class="error-msg" id="error-year">Please select your year</div>
                         <div class="nav-buttons">
-                            <button class="btn-prev" onclick="prevStep()">BACK</button>
+                            <button type="button" class="btn-prev" onclick="prevStep()">BACK</button>
                         </div>
                     </div>
 
@@ -124,8 +113,8 @@
                         </select>
                         <div class="error-msg" id="error-branch">Please select your branch</div>
                         <div class="nav-buttons">
-                            <button class="btn-next" onclick="nextStep()">OK ✓</button>
-                            <button class="btn-prev" onclick="prevStep()">BACK</button>
+                            <button type="button" class="btn-next" onclick="nextStep()">OK ✓</button>
+                            <button type="button" class="btn-prev" onclick="prevStep()">BACK</button>
                         </div>
                     </div>
 
@@ -136,8 +125,8 @@
                         <input type="text" id="section" placeholder="e.g. A, B, C..." autocomplete="off">
                         <div class="error-msg" id="error-section">Please enter your section</div>
                         <div class="nav-buttons">
-                            <button class="btn-next" onclick="nextStep()">OK ✓</button>
-                            <button class="btn-prev" onclick="prevStep()">BACK</button>
+                            <button type="button" class="btn-next" onclick="nextStep()">OK ✓</button>
+                            <button type="button" class="btn-prev" onclick="prevStep()">BACK</button>
                         </div>
                     </div>
 
@@ -169,7 +158,7 @@
                         </div>
                         <div class="error-msg" id="error-interest">Please select an area</div>
                         <div class="nav-buttons">
-                            <button class="btn-prev" onclick="prevStep()">BACK</button>
+                            <button type="button" class="btn-prev" onclick="prevStep()">BACK</button>
                         </div>
                     </div>
 
@@ -181,8 +170,8 @@
                         <textarea id="reason" rows="2" placeholder="Type your answer here..."></textarea>
                         <div class="error-msg" id="error-reason">Please share your motivation</div>
                         <div class="nav-buttons">
-                            <button class="btn-next" onclick="submitForm()">SUBMIT</button>
-                            <button class="btn-prev" onclick="prevStep()">BACK</button>
+                            <button type="button" class="btn-next" onclick="submitForm()">SUBMIT</button>
+                            <button type="button" class="btn-prev" onclick="prevStep()">BACK</button>
                         </div>
                     </div>
 
@@ -206,7 +195,7 @@
         </div>
     </div>
 
-    <script type="module" src="join-script.js"></script>
+    <script src="join-script.js"></script>
 </body>
 
 </html>

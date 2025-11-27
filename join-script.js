@@ -1,10 +1,7 @@
 /* join-script.js */
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 // --- Firebase Configuration ---
 // TODO: Replace with your actual Firebase project config
-// You can get this from the Firebase Console -> Project Settings -> General -> Your Apps
 const firebaseConfig = {
     apiKey: "YOUR_API_KEY",
     authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
@@ -17,8 +14,8 @@ const firebaseConfig = {
 // Initialize Firebase (Try/Catch to handle missing config gracefully)
 let db;
 try {
-    const app = initializeApp(firebaseConfig);
-    db = getFirestore(app);
+    firebase.initializeApp(firebaseConfig);
+    db = firebase.firestore();
     console.log("Firebase initialized");
 } catch (error) {
     console.warn("Firebase initialization failed. Check config.", error);
@@ -37,12 +34,6 @@ const form = document.getElementById('joinForm');
 
 // Initialize
 updateProgress();
-
-// Expose functions to window for HTML onclick attributes
-window.nextStep = nextStep;
-window.prevStep = prevStep;
-window.selectOption = selectOption;
-window.submitForm = submitForm;
 
 // Handle Enter Key
 document.addEventListener('keydown', (e) => {
@@ -194,7 +185,7 @@ function selectOption(card, groupName) {
 async function submitForm() {
     if (!validateStep(currentStep)) return;
 
-    const btn = document.querySelector('.btn-next'); // The submit button
+    const btn = document.querySelector('.question-slide[data-step="7"] .btn-next'); // The submit button
     const originalText = btn.innerText;
     btn.innerText = "SENDING...";
     btn.disabled = true;
@@ -208,13 +199,13 @@ async function submitForm() {
         section: document.getElementById('section').value,
         interest: document.querySelector('input[name="interest"]:checked').value,
         reason: document.getElementById('reason').value,
-        timestamp: serverTimestamp(),
+        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
         status: 'pending' // For dashboard
     };
 
     try {
         if (db) {
-            await addDoc(collection(db, "applicants"), formData);
+            await db.collection("applicants").add(formData);
             console.log("Document written to Firebase");
         } else {
             console.log("Firebase not configured. Mock submission:", formData);

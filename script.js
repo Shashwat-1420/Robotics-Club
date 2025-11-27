@@ -266,12 +266,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /* --- Mobile Menu Logic --- */
     const mobileMenuButton = document.getElementById('mobile-menu-button');
-    const navLinks = document.querySelector('.md\\:flex'); // Select the desktop menu container
+    const navLinks = document.getElementById('nav-links');
 
     if (mobileMenuButton && navLinks) {
         mobileMenuButton.addEventListener('click', () => {
             // Toggle visibility classes
             navLinks.classList.toggle('hidden');
+
+            // Add mobile specific styling
             navLinks.classList.toggle('flex');
             navLinks.classList.toggle('flex-col');
             navLinks.classList.toggle('absolute');
@@ -282,6 +284,9 @@ document.addEventListener('DOMContentLoaded', () => {
             navLinks.classList.toggle('p-6');
             navLinks.classList.toggle('border-b');
             navLinks.classList.toggle('border-cyan-500/30');
+            navLinks.classList.toggle('space-y-4');
+
+            // Note: md: classes in HTML handle the desktop reset automatically
         });
     }
 });

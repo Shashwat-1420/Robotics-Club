@@ -136,4 +136,131 @@ document.addEventListener('DOMContentLoaded', () => {
             document.body.style.overflow = 'auto';
         }
     });
+
+    /* --- Typewriter Animation Logic --- */
+    const line1 = document.getElementById('line1');
+    const line2 = document.getElementById('line2');
+    const line3 = document.getElementById('line3');
+
+    // Tagline sets
+    const taglineSet1 = ['INNOVATE.', 'BUILD.', 'INSPIRE.'];
+    const taglineSet2 = ['CODE.', 'CONSTRUCT.', 'CONQUER.'];
+
+    let currentSet = 1; // Start with first set
+    let currentLine = 0;
+    let currentTexts = ['', '', '']; // Track text for each line
+    let typingSpeed = 100; // milliseconds per character
+    let erasingSpeed = 50; // milliseconds per character
+    let pauseAfterTyping = 2500; // pause after all lines are typed
+    let pauseAfterErasing = 800; // pause after all lines are erased
+
+    function getCurrentTaglineSet() {
+        return currentSet === 1 ? taglineSet1 : taglineSet2;
+    }
+
+    function getLineElement(lineIndex) {
+        if (lineIndex === 0) return line1;
+        if (lineIndex === 1) return line2;
+        return line3;
+    }
+
+    function applyGradientToLine(lineElement, lineIndex, setIndex) {
+        // Apply gradient to third line of both sets (INSPIRE. and CONQUER.)
+        if (lineIndex === 2) {
+            lineElement.classList.add('gradient-text');
+        } else {
+            lineElement.classList.remove('gradient-text');
+        }
+    }
+
+    function typeText() {
+        const taglineSet = getCurrentTaglineSet();
+        const lineElement = getLineElement(currentLine);
+        const targetText = taglineSet[currentLine];
+
+        if (currentTexts[currentLine].length < targetText.length) {
+            currentTexts[currentLine] = targetText.substring(0, currentTexts[currentLine].length + 1);
+            lineElement.textContent = currentTexts[currentLine];
+            lineElement.setAttribute('data-text', currentTexts[currentLine]);
+            lineElement.classList.add('typing', 'active');
+            applyGradientToLine(lineElement, currentLine, currentSet);
+            setTimeout(typeText, typingSpeed);
+        } else {
+            // Finished typing this line
+            lineElement.classList.remove('typing');
+            
+            // Move to next line
+            currentLine++;
+            
+            if (currentLine < taglineSet.length) {
+                // More lines to type
+                setTimeout(typeText, 300);
+            } else {
+                // All lines typed, wait then erase all at once
+                setTimeout(() => {
+                    eraseAllLines();
+                }, pauseAfterTyping);
+            }
+        }
+    }
+
+    function eraseAllLines() {
+        const taglineSet = getCurrentTaglineSet();
+        let allErased = true;
+        
+        // Add glitch effect to container
+        const container = document.querySelector('.typewriter-container');
+        container.classList.add('glitch-erase');
+        
+        // Erase all three lines simultaneously
+        for (let i = 0; i < 3; i++) {
+            const lineElement = getLineElement(i);
+            
+            if (currentTexts[i].length > 0) {
+                currentTexts[i] = currentTexts[i].substring(0, currentTexts[i].length - 1);
+                lineElement.textContent = currentTexts[i];
+                lineElement.setAttribute('data-text', currentTexts[i]);
+                lineElement.classList.add('erasing');
+                allErased = false;
+            }
+        }
+        
+        if (!allErased) {
+            setTimeout(eraseAllLines, erasingSpeed);
+        } else {
+            // All lines erased, remove classes and switch to next set
+            for (let i = 0; i < 3; i++) {
+                const lineElement = getLineElement(i);
+                lineElement.classList.remove('erasing', 'active', 'gradient-text');
+            }
+            
+            // Remove glitch effect
+            container.classList.remove('glitch-erase');
+            
+            // Switch to next set
+            currentLine = 0;
+            currentSet = currentSet === 1 ? 2 : 1;
+            currentTexts = ['', '', ''];
+            
+            setTimeout(() => {
+                typeText();
+            }, pauseAfterErasing);
+        }
+    }
+
+    // Start the animation
+    setTimeout(() => {
+        typeText();
+    }, 500); // Initial delay
+
+    /* --- Gallery Modal openModal function (for onclick handlers) --- */
+    window.openModal = function(imageSrc, title, date) {
+        if (galleryModal && modalImage && modalTitle && modalDate) {
+            modalImage.src = imageSrc;
+            modalTitle.innerText = title;
+            modalDate.innerText = date;
+            galleryModal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+    };
 });

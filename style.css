@@ -80,14 +80,14 @@ body {
     left: 2px;
     text-shadow: -1px 0 #ff00c1;
     clip: rect(44px, 450px, 56px, 0);
-    animation: glitch-anim 5s infinite linear alternate-reverse;
+    animation: glitch-anim 8s infinite linear alternate-reverse;
 }
 
 .glitch-text::after {
     left: -2px;
     text-shadow: -1px 0 #00fff9;
     clip: rect(44px, 450px, 56px, 0);
-    animation: glitch-anim2 5s infinite linear alternate-reverse;
+    animation: glitch-anim2 8s infinite linear alternate-reverse;
 }
 
 @keyframes glitch-anim {

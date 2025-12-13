@@ -23,7 +23,7 @@
 
     <!-- Header -->
     <header class="fixed w-full top-0 z-50 glass-header transition-all duration-300">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center relative">
             <a href="#" class="flex items-center space-x-3 group">
                 <!-- Logo Image -->
                 <img src="media/logo.png" alt="Robotics Club Logo"
@@ -33,30 +33,25 @@
                         class="text-cyan-400">.CLUB</span></span>
             </a>
 
-            <!-- Desktop Menu -->
-            <div class="hidden md:flex items-center space-x-8">
-                <a href="#hero"
-                    class="nav-link text-sm font-medium tracking-wide hover:text-cyan-400 transition-colors">HOME</a>
-                <a href="#about"
-                    class="nav-link text-sm font-medium tracking-wide hover:text-cyan-400 transition-colors">ABOUT</a>
-                <a href="#projects"
-                    class="nav-link text-sm font-medium tracking-wide hover:text-cyan-400 transition-colors">PROJECTS</a>
-                <a href="#training"
-                    class="nav-link text-sm font-medium tracking-wide hover:text-cyan-400 transition-colors">TRAINING</a>
-                <a href="#team"
-                    class="nav-link text-sm font-medium tracking-wide hover:text-cyan-400 transition-colors">TEAM</a>
-                <a href="#contact"
-                    class="px-4 py-2 border border-cyan-400 text-cyan-400 text-sm font-bold rounded hover:bg-cyan-400 hover:text-black transition-all shadow-[0_0_10px_rgba(6,182,212,0.3)] hover:shadow-[0_0_20px_rgba(6,182,212,0.6)]">JOIN
-                    US</a>
+            <!-- Navigation -->
+            <div class="flex items-center space-x-4">
+                <div id="nav-links"
+                    class="hidden md:flex items-center md:space-x-8 text-white text-sm font-medium tracking-wide transition-all duration-300">
+                    <a href="#hero" class="nav-link hover:text-cyan-400 transition-colors">HOME</a>
+                    <a href="#about" class="nav-link hover:text-cyan-400 transition-colors">ABOUT</a>
+                    <a href="#projects" class="nav-link hover:text-cyan-400 transition-colors">PROJECTS</a>
+                    <a href="#training" class="nav-link hover:text-cyan-400 transition-colors">TRAINING</a>
+                    <a href="#team" class="nav-link hover:text-cyan-400 transition-colors">TEAM</a>
+                    <a href="#gallery" class="nav-link hover:text-cyan-400 transition-colors">GALLERY</a>
+                </div>
+                <button id="mobile-menu-button" aria-label="Toggle navigation" aria-expanded="false"
+                    class="md:hidden p-2 rounded border border-white/20 hover:border-cyan-400 text-white hover:text-cyan-400 transition-colors">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m0 6H4">
+                        </path>
+                    </svg>
+                </button>
             </div>
-
-            <!-- Mobile Menu Button -->
-            <button id="mobile-menu-button" class="md:hidden text-white hover:text-cyan-400">
-                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7">
-                    </path>
-                </svg>
-            </button>
         </nav>
     </header>
 
@@ -73,7 +68,8 @@
             <div class="container mx-auto px-4 z-10 text-center">
                 <h2 class="text-cyan-400 font-orbitron tracking-[0.2em] text-sm md:text-base mb-4 animate-pulse">
                     SYSTEM.INIT(2025)</h2>
-                <h1 class="text-5xl md:text-7xl lg:text-8xl font-black font-orbitron mb-6 leading-tight typewriter-container">
+                <h1
+                    class="text-5xl md:text-7xl lg:text-8xl font-black font-orbitron mb-6 leading-tight typewriter-container">
                     <div class="typewriter-line" id="line1"></div>
                     <div class="typewriter-line" id="line2"></div>
                     <div class="typewriter-line" id="line3"></div>
@@ -88,9 +84,9 @@
                         class="px-8 py-4 bg-cyan-500 text-black font-bold font-orbitron tracking-wide rounded hover:bg-cyan-400 hover:scale-105 transition-all shadow-[0_0_20px_rgba(6,182,212,0.5)]">
                         EXPLORE PROJECTS
                     </a>
-                    <a href="#training"
+                    <a href="join-us.html"
                         class="px-8 py-4 border border-purple-500 text-purple-400 font-bold font-orbitron tracking-wide rounded hover:bg-purple-500/10 hover:text-purple-300 transition-all">
-                        START TRAINING
+                        JOIN US
                     </a>
                 </div>
             </div>
@@ -106,16 +102,75 @@
                             <p class="text-cyan-400 font-mono text-sm">> ACCESSING ARCHIVES...</p>
                         </div>
                         <p class="text-gray-300 text-lg leading-relaxed">
-                            The Robotics Club at Amrita Vishwa Vidyapeetham is a vibrant, multidisciplinary hub.
-                            Founded in 2024, we bridge the gap between theoretical knowledge and real-world application.
+                            Driven by a passion for innovation and intelligent automation, our Robotics Club is a
+                            vibrant community of aspiring engineers and researchers dedicated to exploring the frontiers
+                            of robotics. We believe in nurturing creativity, technical excellence, and practical
+                            problem-solving through a collaborative teaching-learning process.
                         </p>
 
-                        <div class="glass-card p-6 rounded-lg border border-white/10">
-                            <h3 class="text-xl font-bold font-orbitron text-purple-400 mb-3">OUR MISSION</h3>
-                            <p class="text-gray-400">
-                                "Innovate, Automate, and Elevate." We empower students to lead in a technology-driven
-                                world through practical innovation.
-                            </p>
+                        <div class="glass-card p-6 rounded-lg border border-white/10 space-y-6">
+                            <div>
+                                <h3 class="text-xl font-bold font-orbitron text-purple-400 mb-2">OUR VISION</h3>
+                                <p class="text-gray-400">
+                                    To develop well-rounded solutions that integrate creativity, technology, and
+                                    practicality for a smarter, automated future.
+                                </p>
+                            </div>
+                            <div class="pt-4 border-t border-white/10">
+                                <h3 class="text-xl font-bold font-orbitron text-cyan-400 mb-2">THEME</h3>
+                                <p class="text-white italic mb-2">"Innovate, Automate, and Elevate: Building the Future
+                                    with AI for Robotics"</p>
+                                <p class="text-gray-400 text-sm">
+                                    This theme reflects our mission to empower undergraduate students with the skills,
+                                    knowledge, and creativity needed to thrive in the ever-evolving field of robotics.
+                                    Through hands-on projects, real-world automation challenges, and interdisciplinary
+                                    teamwork, we aim to elevate problem-solving capabilities using cutting-edge
+                                    technologies.
+                                </p>
+                            </div>
+                            <div class="pt-4 border-t border-white/10">
+                                <h3 class="text-xl font-bold font-orbitron text-green-400 mb-3">AREAS OF INTEREST</h3>
+                                <p class="text-gray-400 text-sm mb-3">Autonomous Marine, Aerial, and Ground Robots,
+                                    including:</p>
+                                <ul class="grid grid-cols-2 gap-2 mb-3">
+                                    <li class="flex items-center text-gray-300 text-sm">
+                                        <svg class="w-4 h-4 mr-2 text-cyan-400" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                        </svg>
+                                        Sensor Integration
+                                    </li>
+                                    <li class="flex items-center text-gray-300 text-sm">
+                                        <svg class="w-4 h-4 mr-2 text-cyan-400" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                        </svg>
+                                        Data-Driven Control
+                                    </li>
+                                    <li class="flex items-center text-gray-300 text-sm">
+                                        <svg class="w-4 h-4 mr-2 text-cyan-400" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                        </svg>
+                                        Computer Vision
+                                    </li>
+                                    <li class="flex items-center text-gray-300 text-sm">
+                                        <svg class="w-4 h-4 mr-2 text-cyan-400" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                        </svg>
+                                        Artificial Intelligence
+                                    </li>
+                                </ul>
+                                <p class="text-gray-400 text-sm italic border-l-2 border-purple-500 pl-3">
+                                    "Together, we are building a future where intelligent machines enhance human
+                                    potential and transform industries."
+                                </p>
+                            </div>
                         </div>
                     </div>
 
@@ -509,8 +564,7 @@
                     <div
                         class="glass-card rounded-xl overflow-hidden flex flex-col md:flex-row border border-purple-500/30 shadow-[0_0_30px_rgba(168,85,247,0.15)]">
                         <div class="w-full md:w-1/3 relative group">
-                            <img class="w-full h-full object-cover min-h-[300px]"
-                                src="https://placehold.co/400x500/1e293b/a855f7?text=Dr.+Desai"
+                            <img class="w-full h-full object-cover min-h-[300px]" src="media/desai.jpeg"
                                 alt="Dr. Ravishankar P Desai">
                             <div
                                 class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent md:bg-gradient-to-r">
@@ -561,7 +615,7 @@
                     <!-- Member 1: Shashwat Mishra -->
                     <div class="team-card glass-card rounded-xl overflow-hidden relative group h-96">
                         <img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                            src="https://placehold.co/400x500/1e293b/06b6d4?text=Shashwat" alt="Shashwat Mishra">
+                            src="media/Shashwat.jpg" alt="Shashwat Mishra">
                         <div
                             class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-slate-900 to-transparent z-10">
                             <h3 class="text-xl font-bold font-orbitron text-white">SHASHWAT MISHRA</h3>
@@ -582,7 +636,7 @@
                     <!-- Member 2: Yashashwini Rao -->
                     <div class="team-card glass-card rounded-xl overflow-hidden relative group h-96">
                         <img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                            src="https://placehold.co/400x500/1e293b/ec4899?text=Yashashwini" alt="Yashashwini Rao">
+                            src="media/Yashashwini.jpg" alt="Yashashwini Rao">
                         <div
                             class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-slate-900 to-transparent z-10">
                             <h3 class="text-xl font-bold font-orbitron text-white">YASHASHWINI RAO</h3>
@@ -603,7 +657,7 @@
                     <!-- Member 3: Rithwik Bhaskar -->
                     <div class="team-card glass-card rounded-xl overflow-hidden relative group h-96">
                         <img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                            src="https://placehold.co/400x500/1e293b/22c55e?text=Rithwik" alt="Rithwik Bhaskar">
+                            src="media/Rithwik.jpg" alt="Rithwik Bhaskar">
                         <div
                             class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-slate-900 to-transparent z-10">
                             <h3 class="text-xl font-bold font-orbitron text-white">RITHWIK BHASKAR</h3>
@@ -625,7 +679,7 @@
                     <!-- Member 4: Arekatla Nishanth -->
                     <div class="team-card glass-card rounded-xl overflow-hidden relative group h-96">
                         <img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                            src="https://placehold.co/400x500/1e293b/eab308?text=Nishanth" alt="Arekatla Nishanth">
+                            src="media/Nishanth.jpg" alt="Arekatla Nishanth">
                         <div
                             class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-slate-900 to-transparent z-10">
                             <h3 class="text-xl font-bold font-orbitron text-white">AREKATLA NISHANTH</h3>
@@ -645,7 +699,7 @@
                     <!-- Member 5: Shaik Thaslim -->
                     <div class="team-card glass-card rounded-xl overflow-hidden relative group h-96">
                         <img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                            src="https://placehold.co/400x500/1e293b/f97316?text=Thaslim" alt="Shaik Thaslim">
+                            src="media/Thaslim.jpg" alt="Shaik Thaslim">
                         <div
                             class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-slate-900 to-transparent z-10">
                             <h3 class="text-xl font-bold font-orbitron text-white">SHAIK THASLIM</h3>
@@ -667,7 +721,7 @@
                     <!-- Member 6: Charitha Sree -->
                     <div class="team-card glass-card rounded-xl overflow-hidden relative group h-96">
                         <img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                            src="https://placehold.co/400x500/1e293b/14b8a6?text=Charitha" alt="Charitha Sree">
+                            src="media/Charitha.jpg" alt="Charitha Sree">
                         <div
                             class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-slate-900 to-transparent z-10">
                             <h3 class="text-xl font-bold font-orbitron text-white">CHARITHA SREE</h3>

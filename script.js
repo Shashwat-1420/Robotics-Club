@@ -54,49 +54,49 @@ document.addEventListener('DOMContentLoaded', () => {
         'shashwat': {
             name: 'SHASHWAT MISHRA',
             role: 'PRESIDENT',
-            image: 'https://placehold.co/400x500/1e293b/06b6d4?text=Shashwat',
+            image: 'media/Shashwat.jpg',
             bio: 'Shashwat is a visionary leader with a passion for robotics and AI. He has led multiple successful projects and is dedicated to fostering a culture of innovation within the club.',
             research: 'Autonomous Navigation, Swarm Robotics, Artificial Intelligence in Robotics.'
         },
         'desai': {
             name: 'DR. RAVISHANKAR P DESAI',
             role: 'FACULTY MENTOR',
-            image: 'https://placehold.co/400x500/1e293b/a855f7?text=Dr.+Desai',
+            image: 'media/desai.jpeg',
             bio: 'Dr. Desai is a distinguished professor with over 15 years of experience in robotics research. He provides invaluable guidance and mentorship to the club members.',
             research: 'Control Systems, Human-Robot Interaction, Industrial Automation.'
         },
         'yashashwini': {
             name: 'YASHASHWINI RAO',
             role: 'STUDENT MENTOR',
-            image: 'https://placehold.co/400x500/1e293b/ec4899?text=Yashashwini',
+            image: 'media/Yashashwini.jpg',
             bio: 'Yashashwini is an experienced senior member who loves teaching and mentoring juniors. She specializes in embedded systems and circuit design.',
             research: 'Embedded Systems, IoT, Signal Processing.'
         },
         'rithwik': {
             name: 'RITHWIK BHASKAR',
             role: 'STUDENT MENTOR',
-            image: 'https://placehold.co/400x500/1e293b/22c55e?text=Rithwik',
+            image: 'media/Rithwik.jpg',
             bio: 'Rithwik is a coding wizard with a knack for solving complex algorithmic problems. He mentors students in software development for robotics.',
             research: 'Computer Vision, SLAM, Path Planning Algorithms.'
         },
         'nishanth': {
             name: 'AREKATLA NISHANTH',
             role: 'VICE PRESIDENT',
-            image: 'https://placehold.co/400x500/1e293b/eab308?text=Nishanth',
+            image: 'media/Nishanth.jpg',
             bio: 'Nishanth is known for his execution skills and operational excellence. He ensures that all club activities run smoothly and efficiently.',
             research: 'Mechanical Design, Kinematics, Rapid Prototyping.'
         },
         'thaslim': {
             name: 'SHAIK THASLIM',
             role: 'TREASURER',
-            image: 'https://placehold.co/400x500/1e293b/f97316?text=Thaslim',
+            image: 'media/Thaslim.jpg',
             bio: 'Thaslim manages the club\'s finances with precision and transparency. She is also an active contributor to hardware projects.',
             research: 'Financial Management in Tech, PCB Design, Sensors.'
         },
-        'charitha': {
+        'charithasree': {
             name: 'CHARITHA SREE',
             role: 'GENERAL SECRETARY',
-            image: 'https://placehold.co/400x500/1e293b/14b8a6?text=Charitha',
+            image: 'media/Charitha.jpg',
             bio: 'Charitha is the organizational backbone of the club. She coordinates events, meetings, and communications effectively.',
             research: 'Project Management, Soft Robotics, Bio-inspired Robotics.'
         }
@@ -188,10 +188,10 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             // Finished typing this line
             lineElement.classList.remove('typing');
-            
+
             // Move to next line
             currentLine++;
-            
+
             if (currentLine < taglineSet.length) {
                 // More lines to type
                 setTimeout(typeText, 300);
@@ -207,15 +207,15 @@ document.addEventListener('DOMContentLoaded', () => {
     function eraseAllLines() {
         const taglineSet = getCurrentTaglineSet();
         let allErased = true;
-        
+
         // Add glitch effect to container
         const container = document.querySelector('.typewriter-container');
         container.classList.add('glitch-erase');
-        
+
         // Erase all three lines simultaneously
         for (let i = 0; i < 3; i++) {
             const lineElement = getLineElement(i);
-            
+
             if (currentTexts[i].length > 0) {
                 currentTexts[i] = currentTexts[i].substring(0, currentTexts[i].length - 1);
                 lineElement.textContent = currentTexts[i];
@@ -224,7 +224,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 allErased = false;
             }
         }
-        
+
         if (!allErased) {
             setTimeout(eraseAllLines, erasingSpeed);
         } else {
@@ -233,15 +233,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 const lineElement = getLineElement(i);
                 lineElement.classList.remove('erasing', 'active', 'gradient-text');
             }
-            
+
             // Remove glitch effect
             container.classList.remove('glitch-erase');
-            
+
             // Switch to next set
             currentLine = 0;
             currentSet = currentSet === 1 ? 2 : 1;
             currentTexts = ['', '', ''];
-            
+
             setTimeout(() => {
                 typeText();
             }, pauseAfterErasing);
@@ -254,7 +254,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 500); // Initial delay
 
     /* --- Gallery Modal openModal function (for onclick handlers) --- */
-    window.openModal = function(imageSrc, title, date) {
+    window.openModal = function (imageSrc, title, date) {
         if (galleryModal && modalImage && modalTitle && modalDate) {
             modalImage.src = imageSrc;
             modalTitle.innerText = title;
@@ -263,4 +263,39 @@ document.addEventListener('DOMContentLoaded', () => {
             document.body.style.overflow = 'hidden';
         }
     };
+
+    /* --- Mobile Menu Logic --- */
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const navLinks = document.getElementById('nav-links');
+
+    if (mobileMenuButton && navLinks) {
+        const toggleMenu = () => {
+            navLinks.classList.toggle('hidden');
+            navLinks.classList.toggle('flex');
+            navLinks.classList.toggle('flex-col');
+            navLinks.classList.toggle('absolute');
+            navLinks.classList.toggle('top-16');
+            navLinks.classList.toggle('left-0');
+            navLinks.classList.toggle('w-full');
+            navLinks.classList.toggle('bg-slate-900/95');
+            navLinks.classList.toggle('p-6');
+            navLinks.classList.toggle('border-b');
+            navLinks.classList.toggle('border-cyan-500/30');
+            navLinks.classList.toggle('space-y-4');
+
+            const isMenuOpen = !navLinks.classList.contains('hidden');
+            mobileMenuButton.setAttribute('aria-expanded', isMenuOpen ? 'true' : 'false');
+        };
+
+        mobileMenuButton.addEventListener('click', toggleMenu);
+
+        // Close menu when a nav link is selected (mobile)
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth < 768 && !navLinks.classList.contains('hidden')) {
+                    toggleMenu();
+                }
+            });
+        });
+    }
 });

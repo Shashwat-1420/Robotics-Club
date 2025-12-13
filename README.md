@@ -52,7 +52,23 @@ A basic administration interface for club management:
    - For the dashboard, navigate to `dashboard.html`.
 3. **Note:** Since this project currently uses Tailwind via CDN, an internet connection is required for styles to load correctly.
 
-## Future Plans (Phase 2)
-- Backend integration for form submissions.
-- Authentication for the Admin Dashboard.
-- Dynamic project galleries and blog section.
+## Future Roadmap
+
+### Phase 2: Foundation & User System
+*Tech Stack: Firebase (Auth, Firestore, Hosting)*
+1.  **Authentication System:**
+    *   **Admins:** Secure login for club management.
+    *   **Members:** User profile creation with email-based login and unique Member ID generation.
+2.  **Upcoming Events:**
+    *   Dynamic container to display upcoming workshops and events.
+    *   "Register Now" functionality.
+
+### Phase 3: Operations & Automation
+1.  **Hardware Inventory System:**
+    *   Admin dashboard to track club assets (sensors, boards, drones).
+    *   Real-time entries for hardware availability.
+2.  **Allocation Record:**
+    *   System to track component issuance to members.
+3.  **Automated Mail System:**
+    *   Auto-notifications for application status (Accepted/Rejected).
+    *   Integration with university mail `roboticsclub@av.amrita.edu`.

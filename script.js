@@ -54,49 +54,49 @@ document.addEventListener('DOMContentLoaded', () => {
         'shashwat': {
             name: 'SHASHWAT MISHRA',
             role: 'PRESIDENT',
-            image: 'https://placehold.co/400x500/1e293b/06b6d4?text=Shashwat',
+            image: 'media/Shashwat.jpg',
             bio: 'Shashwat is a visionary leader with a passion for robotics and AI. He has led multiple successful projects and is dedicated to fostering a culture of innovation within the club.',
             research: 'Autonomous Navigation, Swarm Robotics, Artificial Intelligence in Robotics.'
         },
         'desai': {
             name: 'DR. RAVISHANKAR P DESAI',
             role: 'FACULTY MENTOR',
-            image: 'https://placehold.co/400x500/1e293b/a855f7?text=Dr.+Desai',
+            image: 'media/desai.jpeg',
             bio: 'Dr. Desai is a distinguished professor with over 15 years of experience in robotics research. He provides invaluable guidance and mentorship to the club members.',
             research: 'Control Systems, Human-Robot Interaction, Industrial Automation.'
         },
         'yashashwini': {
             name: 'YASHASHWINI RAO',
             role: 'STUDENT MENTOR',
-            image: 'https://placehold.co/400x500/1e293b/ec4899?text=Yashashwini',
+            image: 'media/Yashashwini.jpg',
             bio: 'Yashashwini is an experienced senior member who loves teaching and mentoring juniors. She specializes in embedded systems and circuit design.',
             research: 'Embedded Systems, IoT, Signal Processing.'
         },
         'rithwik': {
             name: 'RITHWIK BHASKAR',
             role: 'STUDENT MENTOR',
-            image: 'https://placehold.co/400x500/1e293b/22c55e?text=Rithwik',
+            image: 'media/Rithwik.jpg',
             bio: 'Rithwik is a coding wizard with a knack for solving complex algorithmic problems. He mentors students in software development for robotics.',
             research: 'Computer Vision, SLAM, Path Planning Algorithms.'
         },
         'nishanth': {
             name: 'AREKATLA NISHANTH',
             role: 'VICE PRESIDENT',
-            image: 'https://placehold.co/400x500/1e293b/eab308?text=Nishanth',
+            image: 'media/Nishanth.jpg',
             bio: 'Nishanth is known for his execution skills and operational excellence. He ensures that all club activities run smoothly and efficiently.',
             research: 'Mechanical Design, Kinematics, Rapid Prototyping.'
         },
         'thaslim': {
             name: 'SHAIK THASLIM',
             role: 'TREASURER',
-            image: 'https://placehold.co/400x500/1e293b/f97316?text=Thaslim',
+            image: 'media/Thaslim.jpg',
             bio: 'Thaslim manages the club\'s finances with precision and transparency. She is also an active contributor to hardware projects.',
             research: 'Financial Management in Tech, PCB Design, Sensors.'
         },
-        'charitha': {
+        'charithasree': {
             name: 'CHARITHA SREE',
             role: 'GENERAL SECRETARY',
-            image: 'https://placehold.co/400x500/1e293b/14b8a6?text=Charitha',
+            image: 'media/Charitha.jpg',
             bio: 'Charitha is the organizational backbone of the club. She coordinates events, meetings, and communications effectively.',
             research: 'Project Management, Soft Robotics, Bio-inspired Robotics.'
         }

@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
         'nishanth': {
             name: 'AREKATLA NISHANTH',
             role: 'VICE PRESIDENT',
-            image: 'media/Nishanth.jpg',
+            image: 'media/Nishanth.jpeg',
             bio: 'Nishanth is known for his execution skills and operational excellence. He ensures that all club activities run smoothly and efficiently.',
             research: 'Mechanical Design, Kinematics, Rapid Prototyping.'
         },

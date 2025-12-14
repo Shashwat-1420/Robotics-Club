@@ -20,9 +20,6 @@
             font-family: 'Orbitron', sans-serif;
         }
     </style>
-    <!-- Firebase SDKs (Compat for file:// usage) -->
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
 </head>
 
 <body class="p-8">
@@ -47,6 +44,27 @@
                 <h3 class="text-slate-400 text-sm font-bold mb-2">ACCEPTED</h3>
                 <p class="text-4xl font-orbitron text-green-400" id="acceptedCount">0</p>
             </div>
+        </div>
+
+        <!-- Event Management -->
+        <div class="mb-10 bg-slate-800 p-6 rounded-lg border border-slate-700">
+            <h2 class="text-xl font-bold font-orbitron text-white mb-4">CREATE NEW EVENT</h2>
+            <form id="eventForm" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <input type="text" id="eventTitle" placeholder="Event Title" required
+                    class="bg-slate-900 border border-slate-600 rounded px-4 py-2 text-white focus:outline-none focus:border-cyan-400">
+                <input type="date" id="eventDate" required
+                    class="bg-slate-900 border border-slate-600 rounded px-4 py-2 text-white focus:outline-none focus:border-cyan-400">
+                <input type="url" id="eventImage" placeholder="Image URL (Unsplash/Imgur)"
+                    class="md:col-span-2 bg-slate-900 border border-slate-600 rounded px-4 py-2 text-white focus:outline-none focus:border-cyan-400">
+                <textarea id="eventDesc" placeholder="Event Description" rows="2" required
+                    class="md:col-span-2 bg-slate-900 border border-slate-600 rounded px-4 py-2 text-white focus:outline-none focus:border-cyan-400"></textarea>
+                <input type="url" id="eventLink" placeholder="Registration Link"
+                    class="md:col-span-2 bg-slate-900 border border-slate-600 rounded px-4 py-2 text-white focus:outline-none focus:border-cyan-400">
+                <button type="submit"
+                    class="md:col-span-2 bg-gradient-to-r from-purple-600 to-cyan-600 text-white font-bold font-orbitron py-2 rounded hover:opacity-90 transition-opacity">
+                    PUBLISH EVENT
+                </button>
+            </form>
         </div>
 
         <!-- Table -->
@@ -74,51 +92,50 @@
         </div>
     </div>
 
-    <script>
-        // Firebase Configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyCceJVl6uUtRZezaudfJLmkFGVQ2NZVHcU",
-            authDomain: "robotics-club-app.firebaseapp.com",
-            projectId: "robotics-club-app",
-            storageBucket: "robotics-club-app.firebasestorage.app",
-            messagingSenderId: "472852004746",
-            appId: "1:472852004746:web:5d74e0e1298970a7ad5273"
-        };
+    <script type="module">
+        import { db, checkAdminAccess } from './auth.js';
+        import { createEvent } from './events.js';
+        import { collection, getDocs, doc, updateDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-        let db;
-        try {
-            firebase.initializeApp(firebaseConfig);
-            db = firebase.firestore();
-        } catch (e) {
-            console.error("Firebase init error", e);
-        }
+        // Check Access
+        checkAdminAccess();
+
+        // Event Form Logic
+        document.getElementById('eventForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const eventData = {
+                title: document.getElementById('eventTitle').value,
+                date: document.getElementById('eventDate').value,
+                image: document.getElementById('eventImage').value,
+                description: document.getElementById('eventDesc').value,
+                link: document.getElementById('eventLink').value
+            };
+            await createEvent(eventData);
+        });
 
         const tableBody = document.getElementById('applicantTable');
 
-        async function loadApplicants() {
-            if (!db) {
-                tableBody.innerHTML = `<tr><td colspan="6" class="p-8 text-center text-red-400">Firebase not configured. Please update config in code.</td></tr>`;
-                return;
-            }
-
+        window.loadApplicants = async function () { // Attach to window for now or rework calls
             try {
-                // Fetch all documents (no orderBy to avoid index errors initially)
-                const querySnapshot = await db.collection("applicants").get();
+                // Fetch all documents from 'users'
+                const querySnapshot = await getDocs(collection(db, "users"));
 
                 let html = '';
                 let total = 0, pending = 0, accepted = 0;
 
-                // Convert to array for sorting
+                // Convert to array
                 const applicants = [];
-                querySnapshot.forEach((doc) => {
-                    applicants.push({ id: doc.id, ...doc.data() });
+                querySnapshot.forEach((docSnap) => {
+                    const data = docSnap.data();
+                    // Optional: Filter out admins or only show members?
+                    if (data.role !== 'admin') {
+                        applicants.push({ id: docSnap.id, ...data });
+                    }
                 });
 
-                // Sort by timestamp descending (newest first) in memory
+                // Sort by createdAt descending
                 applicants.sort((a, b) => {
-                    const tA = a.timestamp ? a.timestamp.seconds : 0;
-                    const tB = b.timestamp ? b.timestamp.seconds : 0;
-                    return tB - tA;
+                    return new Date(b.createdAt) - new Date(a.createdAt);
                 });
 
                 applicants.forEach((data) => {
@@ -135,24 +152,25 @@
                     html += `
                         <tr class="hover:bg-slate-700/50 transition-colors">
                             <td class="p-4">
-                                <div class="font-bold text-white">${data.name}</div>
-                                <div class="text-xs text-slate-400">${data.email}</div>
+                                <div class="font-bold text-white">${data.name || 'N/A'}</div>
+                                <div class="text-xs text-slate-400">${data.email || 'N/A'}</div>
+                                <div class="text-[10px] font-mono text-cyan-600">${data.memberId || ''}</div>
                             </td>
                             <td class="p-4 text-sm">
-                                <div>${data.year}</div>
-                                <div class="text-slate-400">${data.branch} (${data.section})</div>
+                                <div>${data.year || '-'}</div>
+                                <div class="text-slate-400">${data.branch || '-'} (${data.section || '-'})</div>
                             </td>
                             <td class="p-4">
                                 <span class="px-2 py-1 rounded text-xs font-mono bg-slate-700 text-cyan-300 border border-cyan-500/30">
-                                    ${data.interest}
+                                    ${data.interests || '-'}
                                 </span>
                             </td>
-                            <td class="p-4 text-sm text-slate-300 max-w-xs truncate" title="${data.reason}">
-                                ${data.reason}
+                             <td class="p-4 text-sm text-slate-300 max-w-xs truncate">
+                                ${data.reason || '-'}
                             </td>
                             <td class="p-4">
                                 <span class="px-2 py-1 rounded text-xs font-bold uppercase ${statusColor}">
-                                    ${data.status}
+                                    ${data.status || 'pending'}
                                 </span>
                             </td>
                             <td class="p-4 text-right space-x-2">
@@ -182,7 +200,7 @@
             if (!confirm(`Mark this applicant as ${status.toUpperCase()}?`)) return;
 
             try {
-                await db.collection("applicants").doc(id).update({ status: status });
+                await updateDoc(doc(db, "users", id), { status: status });
                 loadApplicants(); // Reload table
             } catch (e) {
                 alert("Error updating status: " + e.message);

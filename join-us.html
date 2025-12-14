@@ -6,9 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join Robotics Club | Apply Now</title>
     <link rel="stylesheet" href="join-style.css">
-    <!-- Firebase SDKs (Compat for file:// usage) -->
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <!-- Auth handled via module in join-script.js -->
 </head>
 
 <body>
@@ -64,9 +62,22 @@
                         </div>
                     </div>
 
-                    <!-- Question 3: Year -->
+                    <!-- Question 3: Password -->
                     <div class="question-slide" data-step="3">
                         <span class="question-number">3 <span style="color: #4b5563">➜</span></span>
+                        <h2>Create a <span class="highlight">password</span> for your account. *</h2>
+                        <p class="helper-text">Min 6 chars. Keep it safe.</p>
+                        <input type="password" id="password" placeholder="••••••••" autocomplete="off">
+                        <div class="error-msg" id="error-password">Min 6 characters required</div>
+                        <div class="nav-buttons">
+                            <button type="button" class="btn-next" onclick="nextStep()">OK ✓</button>
+                            <button type="button" class="btn-prev" onclick="prevStep()">BACK</button>
+                        </div>
+                    </div>
+
+                    <!-- Question 4: Year -->
+                    <div class="question-slide" data-step="4">
+                        <span class="question-number">4 <span style="color: #4b5563">➜</span></span>
                         <h2>Which <span class="highlight">year</span> are you currently in? *</h2>
                         <div class="options-grid">
                             <label class="option-card" onclick="selectOption(this, 'year')">
@@ -96,9 +107,9 @@
                         </div>
                     </div>
 
-                    <!-- Question 4: Branch -->
-                    <div class="question-slide" data-step="4">
-                        <span class="question-number">4 <span style="color: #4b5563">➜</span></span>
+                    <!-- Question 5: Branch -->
+                    <div class="question-slide" data-step="5">
+                        <span class="question-number">5 <span style="color: #4b5563">➜</span></span>
                         <h2>Select your <span class="highlight">branch</span> of study. *</h2>
                         <select id="branch">
                             <option value="" disabled selected>Choose one...</option>
@@ -114,9 +125,9 @@
                         </div>
                     </div>
 
-                    <!-- Question 5: Section -->
-                    <div class="question-slide" data-step="5">
-                        <span class="question-number">5 <span style="color: #4b5563">➜</span></span>
+                    <!-- Question 6: Section -->
+                    <div class="question-slide" data-step="6">
+                        <span class="question-number">6 <span style="color: #4b5563">➜</span></span>
                         <h2>What is your <span class="highlight">section</span>? *</h2>
                         <input type="text" id="section" placeholder="e.g. A, B, C..." autocomplete="off">
                         <div class="error-msg" id="error-section">Please enter your section</div>
@@ -126,9 +137,9 @@
                         </div>
                     </div>
 
-                    <!-- Question 6: Interest -->
-                    <div class="question-slide" data-step="6">
-                        <span class="question-number">6 <span style="color: #4b5563">➜</span></span>
+                    <!-- Question 7: Interest -->
+                    <div class="question-slide" data-step="7">
+                        <span class="question-number">7 <span style="color: #4b5563">➜</span></span>
                         <h2>Which area interests you the most? *</h2>
                         <div class="options-grid">
                             <label class="option-card" onclick="selectOption(this, 'interest')">
@@ -158,9 +169,9 @@
                         </div>
                     </div>
 
-                    <!-- Question 7: Why Join -->
-                    <div class="question-slide" data-step="7">
-                        <span class="question-number">7 <span style="color: #4b5563">➜</span></span>
+                    <!-- Question 8: Why Join -->
+                    <div class="question-slide" data-step="8">
+                        <span class="question-number">8 <span style="color: #4b5563">➜</span></span>
                         <h2><span class="highlight">Why</span> do you want to join us? *</h2>
                         <p class="helper-text">Tell us what drives you...</p>
                         <textarea id="reason" rows="2" placeholder="Type your answer here..."></textarea>
@@ -193,7 +204,7 @@
         </div>
     </div>
 
-    <script src="join-script.js"></script>
+    <script type="module" src="join-script.js"></script>
 </body>
 
 </html>

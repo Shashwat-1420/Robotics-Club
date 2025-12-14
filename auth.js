@@ -21,10 +21,12 @@ export async function registerUser(email, password, additionalData) {
             memberId: memberId,
             role: 'member', // Default role
             name: additionalData.name,
-            phone: additionalData.phone,
+            phone: additionalData.phone || '',
             branch: additionalData.branch,
             year: additionalData.year,
+            section: additionalData.section || '',
             interests: additionalData.interests,
+            reason: additionalData.reason || '',
             status: 'pending',
             createdAt: new Date().toISOString()
         });

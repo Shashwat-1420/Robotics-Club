@@ -1,53 +1,34 @@
 /* join-script.js */
-
-// --- Firebase Configuration ---
-// TODO: Replace with your actual Firebase project config
-const firebaseConfig = {
-    apiKey: "AIzaSyCceJVl6uUtRZezaudfJLmkFGVQ2NZVHcU",
-    authDomain: "robotics-club-app.firebaseapp.com",
-    projectId: "robotics-club-app",
-    storageBucket: "robotics-club-app.firebasestorage.app",
-    messagingSenderId: "472852004746",
-    appId: "1:472852004746:web:5d74e0e1298970a7ad5273"
-};
-
-// Initialize Firebase (Try/Catch to handle missing config gracefully)
-let db;
-try {
-    firebase.initializeApp(firebaseConfig);
-    db = firebase.firestore();
-    console.log("Firebase initialized");
-} catch (error) {
-    console.warn("Firebase initialization failed. Check config.", error);
-}
+import { registerUser } from './auth.js';
 
 // --- Form Logic ---
 let currentStep = 1;
-const totalSteps = 7;
+const totalSteps = 8; // Added Password step
 
 // DOM Elements
 const progressBar = document.getElementById('progressBar');
 const stepIndicator = document.getElementById('stepIndicator');
-const slides = document.querySelectorAll('.question-slide');
-const successScreen = document.getElementById('successScreen');
+// Note: questions are queried dynamically or we can query them all
 const form = document.getElementById('joinForm');
+const successScreen = document.getElementById('successScreen');
 
 // Initialize
 updateProgress();
 
+// Make functions available globally for HTML onclick attributes
+window.nextStep = nextStep;
+window.prevStep = prevStep;
+window.selectOption = selectOption;
+window.submitForm = submitForm;
+
 // Handle Enter Key
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
-        // Prevent default form submission
         e.preventDefault();
-
-        // If on textarea (last step), allow new lines unless Ctrl+Enter
         if (currentStep === totalSteps) {
             if (e.ctrlKey) submitForm();
             return;
         }
-
-        // For other inputs, go to next step
         nextStep();
     }
 });
@@ -69,6 +50,7 @@ function showError(step, msg) {
 
 function validateStep(step) {
     const slide = document.querySelector(`.question-slide[data-step="${step}"]`);
+    if (!slide) return true;
 
     if (step === 1) { // Name
         const val = slide.querySelector('input').value.trim();
@@ -85,35 +67,42 @@ function validateStep(step) {
             return false;
         }
     }
-    else if (step === 3) { // Year
+    else if (step === 3) { // Password (NEW)
+        const val = slide.querySelector('input').value;
+        if (val.length < 6) {
+            showError(step, "Password must be at least 6 characters");
+            return false;
+        }
+    }
+    else if (step === 4) { // Year
         const selected = slide.querySelector('input[type="radio"]:checked');
         if (!selected) {
             showError(step, "Please select your year");
             return false;
         }
     }
-    else if (step === 4) { // Branch
+    else if (step === 5) { // Branch
         const val = slide.querySelector('select').value;
         if (!val) {
             showError(step, "Please select your branch");
             return false;
         }
     }
-    else if (step === 5) { // Section
+    else if (step === 6) { // Section
         const val = slide.querySelector('input').value.trim();
         if (val.length < 1) {
             showError(step, "Please enter your section");
             return false;
         }
     }
-    else if (step === 6) { // Interest
+    else if (step === 7) { // Interest
         const selected = slide.querySelector('input[type="radio"]:checked');
         if (!selected) {
             showError(step, "Please select an area of interest");
             return false;
         }
     }
-    else if (step === 7) { // Reason
+    else if (step === 8) { // Reason
         const val = slide.querySelector('textarea').value.trim();
         if (val.length < 10) {
             showError(step, "Please tell us a bit more (min 10 chars)");
@@ -125,25 +114,35 @@ function validateStep(step) {
 }
 
 function nextStep() {
-    if (!validateStep(currentStep)) return;
+    console.log("nextStep called. Current Step:", currentStep);
+    if (!validateStep(currentStep)) {
+        console.log("Validation failed for step", currentStep);
+        return;
+    }
 
     if (currentStep < totalSteps) {
         const currentSlide = document.querySelector(`.question-slide[data-step="${currentStep}"]`);
         const nextSlide = document.querySelector(`.question-slide[data-step="${currentStep + 1}"]`);
 
-        currentSlide.classList.remove('active');
-        currentSlide.classList.add('prev');
+        console.log("Transitioning from", currentStep, "to", currentStep + 1);
 
-        nextSlide.classList.add('active');
+        if (currentSlide && nextSlide) {
+            currentSlide.classList.remove('active');
+            currentSlide.classList.add('prev');
+            nextSlide.classList.add('active');
 
-        currentStep++;
-        updateProgress();
+            currentStep++;
+            updateProgress();
 
-        // Auto-focus next input
-        setTimeout(() => {
-            const input = nextSlide.querySelector('input, select, textarea');
-            if (input) input.focus();
-        }, 500);
+            setTimeout(() => {
+                const input = nextSlide.querySelector('input, select, textarea');
+                if (input) input.focus();
+            }, 500);
+        } else {
+            console.error("Missing slides. Current:", currentSlide, "Next:", nextSlide);
+        }
+    } else {
+        console.log("Already at last step");
     }
 }
 
@@ -152,31 +151,27 @@ function prevStep() {
         const currentSlide = document.querySelector(`.question-slide[data-step="${currentStep}"]`);
         const prevSlide = document.querySelector(`.question-slide[data-step="${currentStep - 1}"]`);
 
-        currentSlide.classList.remove('active');
+        if (currentSlide && prevSlide) {
+            currentSlide.classList.remove('active');
+            prevSlide.classList.remove('prev');
+            prevSlide.classList.add('active');
 
-        prevSlide.classList.remove('prev');
-        prevSlide.classList.add('active');
-
-        currentStep--;
-        updateProgress();
+            currentStep--;
+            updateProgress();
+        }
     }
 }
 
 function selectOption(card, groupName) {
-    // Remove selected class from all cards in this group
     const cards = document.querySelectorAll(`input[name="${groupName}"]`);
     cards.forEach(input => {
         input.parentElement.classList.remove('selected');
     });
 
-    // Add selected class to clicked card
     card.classList.add('selected');
-
-    // Select the radio button
     const radio = card.querySelector('input');
     radio.checked = true;
 
-    // Auto advance after short delay
     setTimeout(() => {
         nextStep();
     }, 400);
@@ -185,44 +180,36 @@ function selectOption(card, groupName) {
 async function submitForm() {
     if (!validateStep(currentStep)) return;
 
-    const btn = document.querySelector('.question-slide[data-step="7"] .btn-next'); // The submit button
-    const originalText = btn.innerText;
-    btn.innerText = "SENDING...";
-    btn.disabled = true;
+    const btn = document.querySelector('.question-slide[data-step="8"] .btn-next');
+    if (btn) {
+        btn.innerText = "SENDING...";
+        btn.disabled = true;
+    }
 
     // Collect Data
-    const formData = {
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value; // Get Password
+
+    const additionalData = {
         name: document.getElementById('name').value,
-        email: document.getElementById('email').value,
         year: document.querySelector('input[name="year"]:checked').value,
         branch: document.getElementById('branch').value,
         section: document.getElementById('section').value,
-        interest: document.querySelector('input[name="interest"]:checked').value,
-        reason: document.getElementById('reason').value,
-        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-        status: 'pending' // For dashboard
+        interests: document.querySelector('input[name="interest"]:checked').value,
+        reason: document.getElementById('reason').value, // Could store this in Firestore too if needed
+        // Note: auth.js logic currently doesn't store 'reason'. I should probably update auth.js or registerUser signature if I want to keep it.
+        // For now, let's pass it in additionalData, auth.js might ignore it unless I update auth.js to spread ...additionalData
     };
 
     try {
-        if (db) {
-            await db.collection("applicants").add(formData);
-            console.log("Document written to Firebase");
-        } else {
-            console.log("Firebase not configured. Mock submission:", formData);
-            // Simulate network delay
-            await new Promise(r => setTimeout(r, 1500));
-        }
-
-        // Show Success
-        form.style.display = 'none';
-        successScreen.style.display = 'block';
-        progressBar.style.width = '100%';
-        stepIndicator.style.display = 'none';
-
+        await registerUser(email, password, additionalData);
+        // registerUser handles redirect on success
     } catch (e) {
-        console.error("Error adding document: ", e);
-        btn.innerText = "ERROR - TRY AGAIN";
-        btn.disabled = false;
-        alert("Something went wrong. Please check your connection.");
+        console.error("Registration Error: ", e);
+        if (btn) {
+            btn.innerText = "ERROR - TRY AGAIN";
+            btn.disabled = false;
+        }
     }
 }
+

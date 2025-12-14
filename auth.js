@@ -12,14 +12,13 @@ export async function registerUser(email, password, additionalData) {
     try {
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
-        const memberId = generateMemberId();
 
         // Store user details in Firestore
         await setDoc(doc(db, "users", user.uid), {
             uid: user.uid,
             email: email,
-            memberId: memberId,
-            role: 'member', // Default role
+            memberId: 'PENDING', // ID will be assigned by Admin
+            role: 'member',
             name: additionalData.name,
             phone: additionalData.phone || '',
             branch: additionalData.branch,
@@ -31,8 +30,9 @@ export async function registerUser(email, password, additionalData) {
             createdAt: new Date().toISOString()
         });
 
-        alert(`Registration Successful! Your Member ID is: ${memberId}`);
-        window.location.href = 'roboticsclubdesign.html'; // Redirect to home
+        await signOut(auth); // Sign out immediately
+        alert("Application Submitted! Your account is pending approval. You will be able to login once an Admin accepts your request.");
+        window.location.href = 'index.html'; // Redirect to home/login
     } catch (error) {
         console.error("Error registering user:", error);
         alert("Registration Failed: " + error.message);
@@ -45,18 +45,33 @@ export async function loginUser(email, password) {
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
 
-        // Check if admin
+        // Check user status in Firestore
         const userDoc = await getDoc(doc(db, "users", user.uid));
+
         if (userDoc.exists()) {
             const userData = userDoc.data();
+
             if (userData.role === 'admin') {
                 window.location.href = 'dashboard.html';
-            } else {
-                window.location.href = 'roboticsclubdesign.html';
+                return;
             }
-        } else {
-            // Fallback if doc doesn't exist (shouldn't happen for normal flow)
+
+            if (userData.status === 'pending') {
+                await signOut(auth);
+                alert("Access Denied: Your application is still PENDING approval.");
+                return;
+            } else if (userData.status === 'rejected') {
+                await signOut(auth);
+                alert("Access Denied: Your application was rejected.");
+                return;
+            }
+
+            // If accepted/approved
             window.location.href = 'roboticsclubdesign.html';
+        } else {
+            // Doc missing?
+            await signOut(auth);
+            alert("Error: User profile not found.");
         }
 
     } catch (error) {

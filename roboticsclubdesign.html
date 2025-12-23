@@ -1056,7 +1056,9 @@
                                  alt="${event.title}" 
                                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                             <div class="absolute top-4 right-4 bg-black/70 backdrop-blur px-3 py-1 rounded border border-white/20">
-                                <span class="text-cyan-400 font-mono text-xs font-bold">${new Date(event.date).toLocaleDateString()}</span>
+                                <span class="text-cyan-400 font-mono text-xs font-bold">
+                                    ${event.comingSoon ? 'COMING SOON' : new Date(event.date).toLocaleDateString()}
+                                </span>
                             </div>
                         </div>
                         <div class="p-6 flex flex-col flex-grow">

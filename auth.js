@@ -31,11 +31,10 @@ export async function registerUser(email, password, additionalData) {
         });
 
         await signOut(auth); // Sign out immediately
-        alert("Application Submitted! Your account is pending approval. You will be able to login once an Admin accepts your request.");
-        window.location.href = 'index.html'; // Redirect to home/login
+        return true; // Return success to let the UI handle feedback
     } catch (error) {
         console.error("Error registering user:", error);
-        alert("Registration Failed: " + error.message);
+        throw error; // Rethrow to be caught by the UI
     }
 }
 

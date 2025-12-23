@@ -1,5 +1,5 @@
 import { db } from './firebase-config.js';
-import { collection, addDoc, getDocs, orderBy, query, limit, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { collection, addDoc, getDocs, orderBy, query, limit, deleteDoc, doc, updateDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 // Create Event
 export async function createEvent(eventData) {
@@ -55,5 +55,20 @@ export async function deleteEvent(eventId) {
     } catch (error) {
         console.error("Error deleting event:", error);
         throw error;
+    }
+}
+
+// Update Event
+export async function updateEvent(eventId, eventData) {
+    try {
+        await updateDoc(doc(db, "events", eventId), {
+            ...eventData,
+            updatedAt: new Date().toISOString()
+        });
+        alert("Event Updated Successfully!");
+        window.location.reload();
+    } catch (error) {
+        console.error("Error updating event:", error);
+        alert("Failed to update event: " + error.message);
     }
 }

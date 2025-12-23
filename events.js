@@ -1,5 +1,5 @@
 import { db } from './firebase-config.js';
-import { collection, addDoc, getDocs, orderBy, query, limit } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { collection, addDoc, getDocs, orderBy, query, limit, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 // Create Event
 export async function createEvent(eventData) {
@@ -29,5 +29,31 @@ export async function getUpcomingEvents() {
     } catch (error) {
         console.error("Error fetching events:", error);
         return [];
+    }
+}
+// Get All Events (for Admin)
+export async function getAllEvents() {
+    try {
+        const q = query(collection(db, "events"), orderBy("createdAt", "desc"));
+        const querySnapshot = await getDocs(q);
+        const events = [];
+        querySnapshot.forEach((doc) => {
+            events.push({ id: doc.id, ...doc.data() });
+        });
+        return events;
+    } catch (error) {
+        console.error("Error fetching all events:", error);
+        return [];
+    }
+}
+
+// Delete Event
+export async function deleteEvent(eventId) {
+    try {
+        await deleteDoc(doc(db, "events", eventId));
+        return true;
+    } catch (error) {
+        console.error("Error deleting event:", error);
+        throw error;
     }
 }

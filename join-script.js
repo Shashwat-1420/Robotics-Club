@@ -203,9 +203,15 @@ async function submitForm() {
 
     try {
         await registerUser(email, password, additionalData);
-        // registerUser handles redirect on success
+
+        // Show Success Screen
+        form.style.display = 'none';
+        successScreen.classList.add('active');
+        successScreen.style.display = 'flex';
+
     } catch (e) {
         console.error("Registration Error: ", e);
+        alert("Registration Failed: " + e.message);
         if (btn) {
             btn.innerText = "ERROR - TRY AGAIN";
             btn.disabled = false;

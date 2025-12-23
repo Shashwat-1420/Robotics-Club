@@ -118,10 +118,16 @@
                         class="md:col-span-2 bg-slate-900 border border-slate-600 rounded px-4 py-2 text-white focus:outline-none focus:border-cyan-400"></textarea>
                     <input type="url" id="eventLink" placeholder="Registration Link"
                         class="md:col-span-2 bg-slate-900 border border-slate-600 rounded px-4 py-2 text-white focus:outline-none focus:border-cyan-400">
-                    <button type="submit"
-                        class="md:col-span-2 bg-gradient-to-r from-purple-600 to-cyan-600 text-white font-bold font-orbitron py-2 rounded hover:opacity-90 transition-opacity">
-                        PUBLISH EVENT
-                    </button>
+                    <div class="md:col-span-2 flex gap-4">
+                        <button type="submit" id="submitEventBtn"
+                            class="flex-grow bg-gradient-to-r from-purple-600 to-cyan-600 text-white font-bold font-orbitron py-2 rounded hover:opacity-90 transition-opacity">
+                            PUBLISH EVENT
+                        </button>
+                        <button type="button" id="cancelEditBtn" onclick="cancelEdit()"
+                            class="hidden px-6 bg-slate-700 text-white font-bold font-orbitron py-2 rounded hover:bg-slate-600 transition-colors">
+                            CANCEL
+                        </button>
+                    </div>
                 </form>
             </div>
 
@@ -152,11 +158,13 @@
     <script type="module">
         import { db } from './firebase-config.js';
         import { checkAdminAccess } from './auth.js';
-        import { createEvent, getAllEvents, deleteEvent } from './events.js';
+        import { createEvent, getAllEvents, deleteEvent, updateEvent } from './events.js';
         import { collection, getDocs, doc, updateDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
         // Check Access
         checkAdminAccess();
+
+        let editingEventId = null;
 
         // UI Helpers
         window.switchTab = (tab) => {
@@ -178,15 +186,24 @@
 
         window.toggleDateInput = (checkbox) => {
             const dateInput = document.getElementById('eventDate');
+            const linkInput = document.getElementById('eventLink');
             if (checkbox.checked) {
                 dateInput.value = '';
                 dateInput.disabled = true;
                 dateInput.classList.add('opacity-50');
                 dateInput.required = false;
+
+                linkInput.disabled = true;
+                linkInput.classList.add('opacity-50');
+                linkInput.placeholder = "Link Disabled (Coming Soon)";
             } else {
                 dateInput.disabled = false;
                 dateInput.classList.remove('opacity-50');
                 dateInput.required = true;
+
+                linkInput.disabled = false;
+                linkInput.classList.remove('opacity-50');
+                linkInput.placeholder = "Registration Link";
             }
         };
 
@@ -201,8 +218,42 @@
                 description: document.getElementById('eventDesc').value,
                 link: document.getElementById('eventLink').value
             };
-            await createEvent(eventData);
+
+            if (editingEventId) {
+                await updateEvent(editingEventId, eventData);
+                cancelEdit();
+            } else {
+                await createEvent(eventData);
+            }
         });
+
+        window.startEditEvent = (eventJson) => {
+            const event = JSON.parse(decodeURIComponent(eventJson));
+            editingEventId = event.id;
+
+            document.getElementById('eventTitle').value = event.title || '';
+            document.getElementById('eventDate').value = event.date || '';
+            document.getElementById('comingSoon').checked = event.comingSoon || false;
+            document.getElementById('eventImage').value = event.image || '';
+            document.getElementById('eventDesc').value = event.description || '';
+            document.getElementById('eventLink').value = event.link || '';
+
+            toggleDateInput(document.getElementById('comingSoon'));
+
+            document.getElementById('submitEventBtn').innerText = "UPDATE EVENT";
+            document.getElementById('cancelEditBtn').classList.remove('hidden');
+
+            // Scroll to form
+            document.getElementById('eventForm').scrollIntoView({ behavior: 'smooth' });
+        };
+
+        window.cancelEdit = () => {
+            editingEventId = null;
+            document.getElementById('eventForm').reset();
+            toggleDateInput(document.getElementById('comingSoon'));
+            document.getElementById('submitEventBtn').innerText = "PUBLISH EVENT";
+            document.getElementById('cancelEditBtn').classList.add('hidden');
+        };
 
         // Event Management Logic
         window.loadEvents = async function () {
@@ -215,7 +266,9 @@
                 return;
             }
 
-            table.innerHTML = events.map(event => `
+            table.innerHTML = events.map(event => {
+                const eventJson = encodeURIComponent(JSON.stringify(event));
+                return `
                 <tr class="hover:bg-slate-700/50 transition-colors">
                     <td class="p-4">
                         <div class="font-bold text-white">${event.title}</div>
@@ -223,17 +276,20 @@
                     </td>
                     <td class="p-4">
                         ${event.comingSoon ?
-                    '<span class="text-purple-400 text-xs font-bold">COMING SOON</span>' :
-                    `<span class="text-slate-300 text-sm">${event.date}</span>`
-                }
+                        '<span class="text-purple-400 text-xs font-bold">COMING SOON</span>' :
+                        `<span class="text-slate-300 text-sm">${event.date}</span>`
+                    }
                     </td>
-                    <td class="p-4 text-right">
+                    <td class="p-4 text-right space-x-2">
+                        <button onclick="startEditEvent('${eventJson}')" class="px-3 py-1 bg-cyan-600/20 hover:bg-cyan-600 text-cyan-400 hover:text-white text-xs rounded border border-cyan-600/50 transition-all">
+                            EDIT
+                        </button>
                         <button onclick="confirmDeleteEvent('${event.id}')" class="px-3 py-1 bg-red-600/20 hover:bg-red-600 text-red-400 hover:text-white text-xs rounded border border-red-600/50 transition-all">
                             DELETE
                         </button>
                     </td>
                 </tr>
-            `).join('');
+            `}).join('');
         };
 
         window.confirmDeleteEvent = async (id) => {

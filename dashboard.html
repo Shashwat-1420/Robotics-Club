@@ -26,80 +26,169 @@
 
     <div class="max-w-7xl mx-auto">
         <header class="flex justify-between items-center mb-10 border-b border-slate-700 pb-6">
-            <h1 class="text-3xl font-bold font-orbitron text-cyan-400">APPLICANT DASHBOARD</h1>
+            <div class="flex items-center gap-4">
+                <a href="roboticsclubdesign.html"
+                    class="p-2 hover:bg-slate-700 rounded-full transition-colors text-cyan-400" title="Back to Home">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
+                        </path>
+                    </svg>
+                </a>
+                <h1 class="text-3xl font-bold font-orbitron text-cyan-400">ADMIN DASHBOARD</h1>
+            </div>
             <div class="text-sm text-slate-400 font-mono">ADMIN_ACCESS_LEVEL_1</div>
         </header>
 
-        <!-- Stats -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-            <div class="bg-slate-800 p-6 rounded-lg border border-slate-700">
-                <h3 class="text-slate-400 text-sm font-bold mb-2">TOTAL APPLICANTS</h3>
-                <p class="text-4xl font-orbitron text-white" id="totalCount">0</p>
+        <!-- Tab Navigation -->
+        <div class="flex space-x-4 mb-8">
+            <button onclick="switchTab('applicants')" id="tab-applicants"
+                class="tab-btn active px-6 py-2 rounded-lg font-orbitron font-bold text-sm transition-all bg-cyan-600 text-white shadow-[0_0_15px_rgba(8,145,178,0.3)]">
+                APPLICANTS
+            </button>
+            <button onclick="switchTab('events')" id="tab-events"
+                class="tab-btn px-6 py-2 rounded-lg font-orbitron font-bold text-sm transition-all bg-slate-800 text-slate-400 border border-slate-700 hover:border-cyan-500/50">
+                EVENT MANAGEMENT
+            </button>
+        </div>
+
+        <div id="applicants-section" class="tab-content">
+            <!-- Stats -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+                <div class="bg-slate-800 p-6 rounded-lg border border-slate-700">
+                    <h3 class="text-slate-400 text-sm font-bold mb-2">TOTAL APPLICANTS</h3>
+                    <p class="text-4xl font-orbitron text-white" id="totalCount">0</p>
+                </div>
+                <div class="bg-slate-800 p-6 rounded-lg border border-slate-700">
+                    <h3 class="text-slate-400 text-sm font-bold mb-2">PENDING REVIEW</h3>
+                    <p class="text-4xl font-orbitron text-yellow-400" id="pendingCount">0</p>
+                </div>
+                <div class="bg-slate-800 p-6 rounded-lg border border-slate-700">
+                    <h3 class="text-slate-400 text-sm font-bold mb-2">ACCEPTED</h3>
+                    <p class="text-4xl font-orbitron text-green-400" id="acceptedCount">0</p>
+                </div>
             </div>
-            <div class="bg-slate-800 p-6 rounded-lg border border-slate-700">
-                <h3 class="text-slate-400 text-sm font-bold mb-2">PENDING REVIEW</h3>
-                <p class="text-4xl font-orbitron text-yellow-400" id="pendingCount">0</p>
-            </div>
-            <div class="bg-slate-800 p-6 rounded-lg border border-slate-700">
-                <h3 class="text-slate-400 text-sm font-bold mb-2">ACCEPTED</h3>
-                <p class="text-4xl font-orbitron text-green-400" id="acceptedCount">0</p>
+
+            <!-- Table -->
+            <div class="bg-slate-800 rounded-lg border border-slate-700 overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead class="bg-slate-900 text-slate-400 uppercase text-xs font-bold">
+                            <tr>
+                                <th class="p-4">Name</th>
+                                <th class="p-4">Year / Branch</th>
+                                <th class="p-4">Interest</th>
+                                <th class="p-4">Reason</th>
+                                <th class="p-4">Status</th>
+                                <th class="p-4 text-right">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="applicantTable" class="divide-y divide-slate-700">
+                            <!-- Rows will be populated by JS -->
+                            <tr>
+                                <td colspan="6" class="p-8 text-center text-slate-500 italic">Loading data...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
-        <!-- Event Management -->
-        <div class="mb-10 bg-slate-800 p-6 rounded-lg border border-slate-700">
-            <h2 class="text-xl font-bold font-orbitron text-white mb-4">CREATE NEW EVENT</h2>
-            <form id="eventForm" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <input type="text" id="eventTitle" placeholder="Event Title" required
-                    class="bg-slate-900 border border-slate-600 rounded px-4 py-2 text-white focus:outline-none focus:border-cyan-400">
-                <input type="date" id="eventDate" required
-                    class="bg-slate-900 border border-slate-600 rounded px-4 py-2 text-white focus:outline-none focus:border-cyan-400">
-                <input type="url" id="eventImage" placeholder="Image URL (Unsplash/Imgur)"
-                    class="md:col-span-2 bg-slate-900 border border-slate-600 rounded px-4 py-2 text-white focus:outline-none focus:border-cyan-400">
-                <textarea id="eventDesc" placeholder="Event Description" rows="2" required
-                    class="md:col-span-2 bg-slate-900 border border-slate-600 rounded px-4 py-2 text-white focus:outline-none focus:border-cyan-400"></textarea>
-                <input type="url" id="eventLink" placeholder="Registration Link"
-                    class="md:col-span-2 bg-slate-900 border border-slate-600 rounded px-4 py-2 text-white focus:outline-none focus:border-cyan-400">
-                <button type="submit"
-                    class="md:col-span-2 bg-gradient-to-r from-purple-600 to-cyan-600 text-white font-bold font-orbitron py-2 rounded hover:opacity-90 transition-opacity">
-                    PUBLISH EVENT
-                </button>
-            </form>
-        </div>
+        <div id="events-section" class="tab-content hidden">
+            <!-- Event Management -->
+            <div class="mb-10 bg-slate-800 p-6 rounded-lg border border-slate-700">
+                <h2 class="text-xl font-bold font-orbitron text-white mb-4">CREATE NEW EVENT</h2>
+                <form id="eventForm" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <input type="text" id="eventTitle" placeholder="Event Title" required
+                        class="bg-slate-900 border border-slate-600 rounded px-4 py-2 text-white focus:outline-none focus:border-cyan-400">
 
-        <!-- Table -->
-        <div class="bg-slate-800 rounded-lg border border-slate-700 overflow-hidden">
-            <div class="overflow-x-auto">
-                <table class="w-full text-left">
-                    <thead class="bg-slate-900 text-slate-400 uppercase text-xs font-bold">
-                        <tr>
-                            <th class="p-4">Name</th>
-                            <th class="p-4">Year / Branch</th>
-                            <th class="p-4">Interest</th>
-                            <th class="p-4">Reason</th>
-                            <th class="p-4">Status</th>
-                            <th class="p-4 text-right">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody id="applicantTable" class="divide-y divide-slate-700">
-                        <!-- Rows will be populated by JS -->
-                        <tr>
-                            <td colspan="6" class="p-8 text-center text-slate-500 italic">Loading data...</td>
-                        </tr>
-                    </tbody>
-                </table>
+                    <div class="flex items-center gap-4 bg-slate-900 border border-slate-600 rounded px-4 py-2">
+                        <input type="date" id="eventDate"
+                            class="bg-transparent text-white focus:outline-none flex-grow">
+                        <label class="flex items-center gap-2 text-xs text-slate-400 cursor-pointer">
+                            <input type="checkbox" id="comingSoon" onchange="toggleDateInput(this)"
+                                class="w-4 h-4 rounded border-slate-600 bg-slate-800 text-cyan-600 focus:ring-cyan-500">
+                            COMING SOON
+                        </label>
+                    </div>
+
+                    <input type="url" id="eventImage" placeholder="Image URL (Unsplash/Imgur)"
+                        class="md:col-span-2 bg-slate-900 border border-slate-600 rounded px-4 py-2 text-white focus:outline-none focus:border-cyan-400">
+                    <textarea id="eventDesc" placeholder="Event Description" rows="2" required
+                        class="md:col-span-2 bg-slate-900 border border-slate-600 rounded px-4 py-2 text-white focus:outline-none focus:border-cyan-400"></textarea>
+                    <input type="url" id="eventLink" placeholder="Registration Link"
+                        class="md:col-span-2 bg-slate-900 border border-slate-600 rounded px-4 py-2 text-white focus:outline-none focus:border-cyan-400">
+                    <button type="submit"
+                        class="md:col-span-2 bg-gradient-to-r from-purple-600 to-cyan-600 text-white font-bold font-orbitron py-2 rounded hover:opacity-90 transition-opacity">
+                        PUBLISH EVENT
+                    </button>
+                </form>
+            </div>
+
+            <!-- Events List Table -->
+            <div class="bg-slate-800 rounded-lg border border-slate-700 overflow-hidden">
+                <div class="p-4 border-b border-slate-700 bg-slate-900/50">
+                    <h2 class="text-lg font-bold font-orbitron text-white">EXISTING EVENTS</h2>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead class="bg-slate-900 text-slate-400 uppercase text-xs font-bold">
+                            <tr>
+                                <th class="p-4">Event</th>
+                                <th class="p-4">Date</th>
+                                <th class="p-4 text-right">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="eventsTable" class="divide-y divide-slate-700">
+                            <!-- Rows will be populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
+    </div>
     </div>
 
     <script type="module">
         import { db } from './firebase-config.js';
         import { checkAdminAccess } from './auth.js';
-        import { createEvent } from './events.js';
+        import { createEvent, getAllEvents, deleteEvent } from './events.js';
         import { collection, getDocs, doc, updateDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
         // Check Access
         checkAdminAccess();
+
+        // UI Helpers
+        window.switchTab = (tab) => {
+            // Update Buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active', 'bg-cyan-600', 'text-white', 'shadow-[0_0_15px_rgba(8,145,178,0.3)]');
+                btn.classList.add('bg-slate-800', 'text-slate-400', 'border-slate-700');
+            });
+            const activeBtn = document.getElementById(`tab-${tab}`);
+            activeBtn.classList.add('active', 'bg-cyan-600', 'text-white', 'shadow-[0_0_15px_rgba(8,145,178,0.3)]');
+            activeBtn.classList.remove('bg-slate-800', 'text-slate-400', 'border-slate-700');
+
+            // Update Content
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.add('hidden'));
+            document.getElementById(`${tab}-section`).classList.remove('hidden');
+
+            if (tab === 'events') loadEvents();
+        };
+
+        window.toggleDateInput = (checkbox) => {
+            const dateInput = document.getElementById('eventDate');
+            if (checkbox.checked) {
+                dateInput.value = '';
+                dateInput.disabled = true;
+                dateInput.classList.add('opacity-50');
+                dateInput.required = false;
+            } else {
+                dateInput.disabled = false;
+                dateInput.classList.remove('opacity-50');
+                dateInput.required = true;
+            }
+        };
 
         // Event Form Logic
         document.getElementById('eventForm').addEventListener('submit', async (e) => {
@@ -107,6 +196,7 @@
             const eventData = {
                 title: document.getElementById('eventTitle').value,
                 date: document.getElementById('eventDate').value,
+                comingSoon: document.getElementById('comingSoon').checked,
                 image: document.getElementById('eventImage').value,
                 description: document.getElementById('eventDesc').value,
                 link: document.getElementById('eventLink').value
@@ -114,35 +204,62 @@
             await createEvent(eventData);
         });
 
+        // Event Management Logic
+        window.loadEvents = async function () {
+            const table = document.getElementById('eventsTable');
+            table.innerHTML = '<tr><td colspan="3" class="p-8 text-center text-slate-500 italic">Loading events...</td></tr>';
+
+            const events = await getAllEvents();
+            if (events.length === 0) {
+                table.innerHTML = '<tr><td colspan="3" class="p-8 text-center text-slate-500">No events found.</td></tr>';
+                return;
+            }
+
+            table.innerHTML = events.map(event => `
+                <tr class="hover:bg-slate-700/50 transition-colors">
+                    <td class="p-4">
+                        <div class="font-bold text-white">${event.title}</div>
+                        <div class="text-[10px] text-slate-500 max-w-xs truncate">${event.description}</div>
+                    </td>
+                    <td class="p-4">
+                        ${event.comingSoon ?
+                    '<span class="text-purple-400 text-xs font-bold">COMING SOON</span>' :
+                    `<span class="text-slate-300 text-sm">${event.date}</span>`
+                }
+                    </td>
+                    <td class="p-4 text-right">
+                        <button onclick="confirmDeleteEvent('${event.id}')" class="px-3 py-1 bg-red-600/20 hover:bg-red-600 text-red-400 hover:text-white text-xs rounded border border-red-600/50 transition-all">
+                            DELETE
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+        };
+
+        window.confirmDeleteEvent = async (id) => {
+            if (!confirm("Are you sure you want to delete this event? This cannot be undone.")) return;
+            try {
+                await deleteEvent(id);
+                loadEvents();
+            } catch (e) {
+                alert("Error deleting event: " + e.message);
+            }
+        };
+
         const tableBody = document.getElementById('applicantTable');
 
-        window.loadApplicants = async function () { // Attach to window for now or rework calls
+        window.loadApplicants = async function () {
             try {
-                // Fetch all documents from 'users'
                 const querySnapshot = await getDocs(collection(db, "users"));
-
                 let html = '';
                 let total = 0, pending = 0, accepted = 0;
-
-                // Convert to array
                 const applicants = [];
-                let adminCount = 0;
-
-                console.log(`Found ${querySnapshot.size} documents in 'users' collection.`);
 
                 querySnapshot.forEach((docSnap) => {
                     applicants.push({ id: docSnap.id, ...docSnap.data() });
                 });
 
-                if (applicants.length === 0 && adminCount > 0) {
-                    // If only admins exist, showing a toast/alert or just log
-                    console.log("Only admin users found. Create a member account to see requests.");
-                }
-
-                // Sort by createdAt descending
-                applicants.sort((a, b) => {
-                    return new Date(b.createdAt) - new Date(a.createdAt);
-                });
+                applicants.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
                 applicants.forEach((data) => {
                     const id = data.id;
@@ -207,20 +324,16 @@
 
         window.updateStatus = async (id, status) => {
             if (!confirm(`Mark this applicant as ${status.toUpperCase()}?`)) return;
-
             try {
                 const updates = { status: status };
-
-                // If accepting, generate Member ID
                 if (status === 'accepted') {
                     const memberId = 'RC-' + Math.floor(1000 + Math.random() * 9000);
                     updates.memberId = memberId;
-                    updates.role = 'member'; // Ensure role is set
+                    updates.role = 'member';
                     alert(`User Accepted! New Member ID Generated: ${memberId}`);
                 }
-
                 await updateDoc(doc(db, "users", id), updates);
-                loadApplicants(); // Reload table
+                loadApplicants();
             } catch (e) {
                 alert("Error updating status: " + e.message);
                 console.error(e);

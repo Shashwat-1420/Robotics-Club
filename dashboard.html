@@ -50,6 +50,14 @@
                 class="tab-btn px-6 py-2 rounded-lg font-orbitron font-bold text-sm transition-all bg-slate-800 text-slate-400 border border-slate-700 hover:border-cyan-500/50">
                 EVENT MANAGEMENT
             </button>
+            <button onclick="switchTab('inventory')" id="tab-inventory"
+                class="tab-btn px-6 py-2 rounded-lg font-orbitron font-bold text-sm transition-all bg-slate-800 text-slate-400 border border-slate-700 hover:border-cyan-500/50">
+                HARDWARE INVENTORY
+            </button>
+            <button onclick="switchTab('allocations')" id="tab-allocations"
+                class="tab-btn px-6 py-2 rounded-lg font-orbitron font-bold text-sm transition-all bg-slate-800 text-slate-400 border border-slate-700 hover:border-cyan-500/50">
+                ALLOCATION RECORDS
+            </button>
         </div>
 
         <div id="applicants-section" class="tab-content">
@@ -95,7 +103,7 @@
         </div>
 
         <div id="events-section" class="tab-content hidden">
-            <!-- Event Management -->
+            <!-- Event Management UI... -->
             <div class="mb-10 bg-slate-800 p-6 rounded-lg border border-slate-700">
                 <h2 class="text-xl font-bold font-orbitron text-white mb-4">CREATE NEW EVENT</h2>
                 <form id="eventForm" class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -131,7 +139,6 @@
                 </form>
             </div>
 
-            <!-- Events List Table -->
             <div class="bg-slate-800 rounded-lg border border-slate-700 overflow-hidden">
                 <div class="p-4 border-b border-slate-700 bg-slate-900/50">
                     <h2 class="text-lg font-bold font-orbitron text-white">EXISTING EVENTS</h2>
@@ -145,9 +152,114 @@
                                 <th class="p-4 text-right">Actions</th>
                             </tr>
                         </thead>
-                        <tbody id="eventsTable" class="divide-y divide-slate-700">
-                            <!-- Rows will be populated by JS -->
-                        </tbody>
+                        <tbody id="eventsTable" class="divide-y divide-slate-700"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="inventory-section" class="tab-content hidden">
+            <!-- Hardware Inventory -->
+            <div class="mb-10 bg-slate-800 p-6 rounded-lg border border-slate-700">
+                <h2 class="text-xl font-bold font-orbitron text-white mb-4">ADD HARDWARE ITEM</h2>
+                <form id="hardwareForm" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <input type="text" id="hwName" placeholder="Item Name (e.g., Arduino Uno)" required
+                        class="bg-slate-900 border border-slate-600 rounded px-4 py-2 text-white focus:outline-none focus:border-cyan-400">
+                    <input type="text" id="hwCategory" placeholder="Category (e.g., Microcontroller)" required
+                        class="bg-slate-900 border border-slate-600 rounded px-4 py-2 text-white focus:outline-none focus:border-cyan-400">
+                    <input type="number" id="hwTotal" placeholder="Total Quantity" required
+                        class="bg-slate-900 border border-slate-600 rounded px-4 py-2 text-white focus:outline-none focus:border-cyan-400">
+                    <input type="url" id="hwImage" placeholder="Image URL (Optional)"
+                        class="bg-slate-900 border border-slate-600 rounded px-4 py-2 text-white focus:outline-none focus:border-cyan-400">
+                    <div class="md:col-span-2 flex gap-4">
+                        <button type="submit" id="submitHwBtn"
+                            class="flex-grow bg-gradient-to-r from-cyan-600 to-blue-600 text-white font-bold font-orbitron py-2 rounded hover:opacity-90 transition-opacity">
+                            SAVE ITEM
+                        </button>
+                        <button type="button" id="cancelHwEditBtn" onclick="cancelHwEdit()"
+                            class="hidden px-6 bg-slate-700 text-white font-bold font-orbitron py-2 rounded hover:bg-slate-600 transition-colors">
+                            CANCEL
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="bg-slate-800 rounded-lg border border-slate-700 overflow-hidden">
+                <div class="p-4 border-b border-slate-700 bg-slate-900/50">
+                    <h2 class="text-lg font-bold font-orbitron text-white">INVENTORY LIST</h2>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead class="bg-slate-900 text-slate-400 uppercase text-xs font-bold">
+                            <tr>
+                                <th class="p-4">Item</th>
+                                <th class="p-4">Category</th>
+                                <th class="p-4">Quantity (Avail/Total)</th>
+                                <th class="p-4 text-right">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="inventoryTable" class="divide-y divide-slate-700"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="allocations-section" class="tab-content hidden">
+            <!-- Allocation Records -->
+            <div class="mb-10 bg-slate-800 p-6 rounded-lg border border-slate-700">
+                <h2 class="text-xl font-bold font-orbitron text-white mb-4">ISSUE HARDWARE</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                    <div class="md:col-span-2">
+                        <div class="relative">
+                            <input type="text" id="memberSearch"
+                                placeholder="Search Member by Member ID (e.g., RC-1234)"
+                                class="w-full bg-slate-900 border border-slate-600 rounded px-4 py-2 text-white focus:outline-none focus:border-cyan-400 transition-all">
+                            <button onclick="searchMember()"
+                                class="absolute right-2 top-1.5 px-3 py-1 bg-cyan-600 text-white text-xs font-bold rounded">SEARCH</button>
+                        </div>
+                        <div id="memberResult"
+                            class="mt-2 p-3 bg-slate-900/50 rounded border border-slate-700 hidden text-sm">
+                            <!-- Member results display here -->
+                        </div>
+                    </div>
+                    <div>
+                        <select id="itemSelect"
+                            class="w-full bg-slate-900 border border-slate-600 rounded px-4 py-2 text-white focus:outline-none focus:border-cyan-400">
+                            <option value="">Select Item...</option>
+                        </select>
+                    </div>
+                    <div class="md:col-span-2 text-sm text-slate-400">
+                        <label class="block mb-1">Expected Return Date:</label>
+                        <input type="date" id="returnDate"
+                            class="w-full bg-slate-900 border border-slate-600 rounded px-4 py-2 text-white focus:outline-none focus:border-cyan-400">
+                    </div>
+                    <div class="flex items-end">
+                        <button onclick="issueItem()"
+                            class="w-full bg-green-600 text-white font-bold font-orbitron py-2 rounded hover:bg-green-500 transition-colors disabled:opacity-50"
+                            id="issueBtn" disabled>
+                            ISSUE ITEM
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-slate-800 rounded-lg border border-slate-700 overflow-hidden">
+                <div class="p-4 border-b border-slate-700 bg-slate-900/50">
+                    <h2 class="text-lg font-bold font-orbitron text-white">ACTIVE ALLOCATIONS</h2>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead class="bg-slate-900 text-slate-400 uppercase text-xs font-bold">
+                            <tr>
+                                <th class="p-4">Member</th>
+                                <th class="p-4">Item</th>
+                                <th class="p-4">Issued Date</th>
+                                <th class="p-4">Return Date</th>
+                                <th class="p-4">Status</th>
+                                <th class="p-4 text-right">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="allocationsTable" class="divide-y divide-slate-700"></tbody>
                     </table>
                 </div>
             </div>
@@ -159,6 +271,11 @@
         import { db } from './firebase-config.js';
         import { checkAdminAccess } from './auth.js';
         import { createEvent, getAllEvents, deleteEvent, updateEvent } from './events.js';
+        import {
+            addHardware, updateHardware, deleteHardware, getAllHardware,
+            issueHardware, returnHardware, getAllAllocations, findMemberByMemberId
+        } from './inventory.js';
+        import { sendStatusNotification } from './mail.js';
         import { collection, getDocs, doc, updateDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
         // Check Access
@@ -182,6 +299,8 @@
             document.getElementById(`${tab}-section`).classList.remove('hidden');
 
             if (tab === 'events') loadEvents();
+            if (tab === 'inventory') loadInventory();
+            if (tab === 'allocations') loadAllocations();
         };
 
         window.toggleDateInput = (checkbox) => {
@@ -381,19 +500,234 @@
         window.updateStatus = async (id, status) => {
             if (!confirm(`Mark this applicant as ${status.toUpperCase()}?`)) return;
             try {
+                const userRef = doc(db, "users", id);
                 const updates = { status: status };
+                let memberId = null;
+
                 if (status === 'accepted') {
-                    const memberId = 'RC-' + Math.floor(1000 + Math.random() * 9000);
+                    memberId = 'RC-' + Math.floor(1000 + Math.random() * 9000);
                     updates.memberId = memberId;
                     updates.role = 'member';
-                    alert(`User Accepted! New Member ID Generated: ${memberId}`);
                 }
-                await updateDoc(doc(db, "users", id), updates);
+
+                await updateDoc(userRef, updates);
+
+                // Get name and email for notification
+                const applicants = await getDocs(collection(db, "users"));
+                const userData = applicants.docs.find(d => d.id === id)?.data();
+
+                if (userData) {
+                    await sendStatusNotification({ ...userData, memberId: memberId || userData.memberId }, status);
+                    if (status === 'accepted') alert(`User Accepted! New Member ID: ${memberId}`);
+                }
+
                 loadApplicants();
             } catch (e) {
                 alert("Error updating status: " + e.message);
                 console.error(e);
             }
+        };
+
+        let editingHwId = null;
+        let selectedMember = null;
+
+        // Inventory Logic
+        window.loadInventory = async function () {
+            const table = document.getElementById('inventoryTable');
+            const itemSelect = document.getElementById('itemSelect');
+            if (!table) return;
+            table.innerHTML = '<tr><td colspan="4" class="p-8 text-center text-slate-500 italic">Loading inventory...</td></tr>';
+
+            const inventory = await getAllHardware();
+
+            if (itemSelect) {
+                itemSelect.innerHTML = '<option value="">Select Item...</option>' +
+                    inventory.filter(item => item.availableQuantity > 0)
+                        .map(item => `<option value="${item.id}" data-membername="${item.name}">${item.name} (${item.availableQuantity} avail)</option>`)
+                        .join('');
+            }
+
+            if (inventory.length === 0) {
+                table.innerHTML = '<tr><td colspan="4" class="p-8 text-center text-slate-500">No hardware found.</td></tr>';
+                return;
+            }
+
+            table.innerHTML = inventory.map(item => {
+                const itemJson = encodeURIComponent(JSON.stringify(item));
+                return `
+                <tr class="hover:bg-slate-700/50 transition-colors">
+                    <td class="p-4">
+                        <div class="font-bold text-white">${item.name}</div>
+                        <div class="text-[10px] text-slate-500">${item.id}</div>
+                    </td>
+                    <td class="p-4 text-sm text-slate-300">${item.category}</td>
+                    <td class="p-4">
+                        <span class="text-cyan-400 font-bold">${item.availableQuantity}</span>
+                        <span class="text-slate-500">/ ${item.totalQuantity}</span>
+                    </td>
+                    <td class="p-4 text-right space-x-2">
+                        <button onclick="startEditHw('${itemJson}')" class="px-3 py-1 bg-cyan-600/20 hover:bg-cyan-600 text-cyan-400 hover:text-white text-xs rounded border border-cyan-600/50 transition-all">
+                            EDIT
+                        </button>
+                        <button onclick="confirmDeleteHw('${item.id}')" class="px-3 py-1 bg-red-600/20 hover:bg-red-600 text-red-400 hover:text-white text-xs rounded border border-red-600/50 transition-all">
+                            DELETE
+                        </button>
+                    </td>
+                </tr>
+            `;
+            }).join('');
+        };
+
+        const hwForm = document.getElementById('hardwareForm');
+        if (hwForm) {
+            hwForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const hwData = {
+                    name: document.getElementById('hwName').value,
+                    category: document.getElementById('hwCategory').value,
+                    totalQuantity: document.getElementById('hwTotal').value,
+                    image: document.getElementById('hwImage').value
+                };
+
+                try {
+                    if (editingHwId) {
+                        hwData.availableQuantity = hwData.totalQuantity;
+                        await updateHardware(editingHwId, hwData);
+                        cancelHwEdit();
+                    } else {
+                        await addHardware(hwData);
+                        hwForm.reset();
+                    }
+                    loadInventory();
+                } catch (e) {
+                    alert("Error saving hardware: " + e.message);
+                }
+            });
+        }
+
+        window.startEditHw = (itemJson) => {
+            const item = JSON.parse(decodeURIComponent(itemJson));
+            editingHwId = item.id;
+            document.getElementById('hwName').value = item.name;
+            document.getElementById('hwCategory').value = item.category;
+            document.getElementById('hwTotal').value = item.totalQuantity;
+            document.getElementById('hwImage').value = item.image || '';
+            document.getElementById('submitHwBtn').innerText = "UPDATE ITEM";
+            document.getElementById('cancelHwEditBtn').classList.remove('hidden');
+            hwForm.scrollIntoView({ behavior: 'smooth' });
+        };
+
+        window.cancelHwEdit = () => {
+            editingHwId = null;
+            hwForm.reset();
+            document.getElementById('submitHwBtn').innerText = "SAVE ITEM";
+            document.getElementById('cancelHwEditBtn').classList.add('hidden');
+        };
+
+        window.confirmDeleteHw = async (id) => {
+            if (!confirm("Delete this item?")) return;
+            await deleteHardware(id);
+            loadInventory();
+        };
+
+        window.searchMember = async () => {
+            const memberId = document.getElementById('memberSearch').value.trim();
+            const resultDiv = document.getElementById('memberResult');
+            const issueBtn = document.getElementById('issueBtn');
+
+            if (!memberId) return;
+            resultDiv.innerHTML = "Searching...";
+            resultDiv.classList.remove('hidden');
+
+            const member = await findMemberByMemberId(memberId);
+            if (member) {
+                selectedMember = member;
+                resultDiv.innerHTML = `
+                    <div class="text-green-400 font-bold">Member Found: ${member.name}</div>
+                    <div class="text-xs text-slate-400">${member.email} | ${member.branch}</div>
+                `;
+                issueBtn.disabled = false;
+            } else {
+                selectedMember = null;
+                resultDiv.innerHTML = `<div class="text-red-400">No member found with ID: ${memberId}</div>`;
+                issueBtn.disabled = true;
+            }
+        };
+
+        window.issueItem = async () => {
+            const itemEl = document.getElementById('itemSelect');
+            const itemId = itemEl.value;
+            const itemName = itemEl.options[itemEl.selectedIndex].text.split(' (')[0];
+            const returnDate = document.getElementById('returnDate').value;
+
+            if (!selectedMember || !itemId || !returnDate) {
+                alert("Complete all fields.");
+                return;
+            }
+
+            try {
+                await issueHardware({
+                    userId: selectedMember.id,
+                    userName: selectedMember.name,
+                    memberId: selectedMember.memberId,
+                    itemId: itemId,
+                    itemName: itemName,
+                    expectedReturn: returnDate
+                });
+                alert("Success!");
+                loadAllocations();
+                loadInventory();
+                document.getElementById('memberSearch').value = '';
+                document.getElementById('memberResult').classList.add('hidden');
+                itemEl.value = '';
+                document.getElementById('returnDate').value = '';
+                document.getElementById('issueBtn').disabled = true;
+                selectedMember = null;
+            } catch (e) {
+                alert("Error: " + e.message);
+            }
+        };
+
+        window.loadAllocations = async function () {
+            const table = document.getElementById('allocationsTable');
+            if (!table) return;
+            table.innerHTML = '<tr><td colspan="6" class="p-8 text-center text-slate-500 italic">Loading records...</td></tr>';
+
+            const allocations = await getAllAllocations();
+            if (allocations.length === 0) {
+                table.innerHTML = '<tr><td colspan="6" class="p-8 text-center text-slate-500">No records.</td></tr>';
+                return;
+            }
+
+            table.innerHTML = allocations.map(record => {
+                const isIssued = record.status === 'issued';
+                return `
+                <tr class="hover:bg-slate-700/50 transition-colors">
+                    <td class="p-4">
+                        <div class="font-bold text-white">${record.userName}</div>
+                        <div class="text-[10px] text-cyan-600 font-mono">${record.memberId}</div>
+                    </td>
+                    <td class="p-4 text-sm text-slate-300">${record.itemName}</td>
+                    <td class="p-4 text-xs text-slate-400">${record.issuedAt?.toDate().toLocaleDateString() || '-'}</td>
+                    <td class="p-4 text-xs ${isIssued ? 'text-yellow-500' : 'text-slate-500'}">${record.expectedReturn}</td>
+                    <td class="p-4">
+                        <span class="px-2 py-1 rounded text-[10px] font-bold uppercase ${isIssued ? 'bg-yellow-500/10 text-yellow-500' : 'bg-green-500/10 text-green-500'}">
+                            ${record.status}
+                        </span>
+                    </td>
+                    <td class="p-4 text-right">
+                        ${isIssued ? `<button onclick="confirmReturn('${record.id}', '${record.itemId}')" class="px-3 py-1 bg-green-600/20 hover:bg-green-600 text-green-400 hover:text-white text-xs rounded border border-green-600/50 transition-all">RETURN</button>` : ''}
+                    </td>
+                </tr>
+            `;
+            }).join('');
+        };
+
+        window.confirmReturn = async (allocId, itemId) => {
+            if (!confirm("Confirm Return?")) return;
+            await returnHardware(allocId, itemId);
+            loadAllocations();
+            loadInventory();
         };
 
         // Load on start

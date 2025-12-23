@@ -958,7 +958,17 @@
         const authContainer = document.getElementById('auth-container');
 
         monitorAuthState(async (user) => {
+            const heroJoinBtn = document.querySelector('a[href="join-us.html"]');
+
             if (user) {
+                // Change Hero Button
+                if (heroJoinBtn) {
+                    heroJoinBtn.innerText = "EXPLORE EVENTS";
+                    heroJoinBtn.href = "#events";
+                    heroJoinBtn.classList.remove('border-purple-500', 'text-purple-400', 'hover:bg-purple-500/10', 'hover:text-purple-300');
+                    heroJoinBtn.classList.add('bg-purple-600', 'text-white', 'hover:bg-purple-500', 'border-transparent');
+                }
+
                 // Fetch User Details
                 let userData = {};
                 try {
@@ -1064,9 +1074,14 @@
                         <div class="p-6 flex flex-col flex-grow">
                             <h3 class="text-xl font-bold font-orbitron text-white mb-2 group-hover:text-cyan-400 transition-colors">${event.title}</h3>
                             <p class="text-gray-400 text-sm mb-6 flex-grow line-clamp-3">${event.description}</p>
-                            <a href="${event.link || '#'}" class="w-full text-center px-4 py-2 bg-slate-800 hover:bg-cyan-600 text-cyan-400 hover:text-black border border-cyan-500/30 hover:border-transparent rounded font-bold font-orbitron text-sm transition-all">
-                                REGISTER NOW
-                            </a>
+                            ${event.comingSoon ?
+                        `<div class="w-full text-center px-4 py-2 bg-slate-800/50 text-slate-500 border border-slate-700 rounded font-bold font-orbitron text-sm cursor-default">
+                                    STAY TUNED
+                                </div>` :
+                        `<a href="${event.link || '#'}" class="w-full text-center px-4 py-2 bg-slate-800 hover:bg-cyan-600 text-cyan-400 hover:text-black border border-cyan-500/30 hover:border-transparent rounded font-bold font-orbitron text-sm transition-all">
+                                    REGISTER NOW
+                                </a>`
+                    }
                         </div>
                     </div>
                 `).join('');

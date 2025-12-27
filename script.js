@@ -73,11 +73,11 @@ document.addEventListener('DOMContentLoaded', () => {
             research: 'Embedded Systems, IoT, Signal Processing.'
         },
         'rithwik': {
-            name: 'RITHWIK BHASKAR',
+            name: 'C RITHVIK BHASKAR',
             role: 'STUDENT MENTOR',
-            image: 'media/Rithwik.jpg',
-            bio: 'Rithwik is a coding wizard with a knack for solving complex algorithmic problems. He mentors students in software development for robotics.',
-            research: 'Computer Vision, SLAM, Path Planning Algorithms.'
+            image: 'media/Rithvik.jpeg',
+            bio: ' AI-focused technologist passionate about impactful innovation.Combines leadership with strong execution to deliver real-world solutions.Driven to inspire teams and shape a smarter future.',
+            research: 'Artificial Intelligence, Product-Focused ML, Real-World Deployment, Innovation.\n FORGE → Focus, Optimize, Research, Grow, Execute'
         },
         'nishanth': {
             name: 'AREKATLA NISHANTH',

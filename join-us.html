@@ -6,9 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join Robotics Club | Apply Now</title>
     <link rel="stylesheet" href="join-style.css">
-    <!-- Firebase SDKs (Compat for file:// usage) -->
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <!-- Auth handled via module in join-script.js -->
 </head>
 
 <body>
@@ -22,15 +20,15 @@
         <div class="image-side">
             <div class="image-overlay"></div>
             <div class="image-content">
-                <h1>FALL <br> 2025 <br> PROGRAM</h1>
-                <p>Campus Partner</p>
+                <h1>FALL <br> 2026 <br> PROGRAM</h1>
+                <p>Club Member</p>
             </div>
         </div>
 
         <!-- Right Side: Form -->
         <div class="form-side">
             <header>
-                <a href="roboticsclubdesign.html" class="logo">ROBOTICS<span>.CLUB</span></a>
+                <a href="index.html" class="logo">ROBOTICS<span>.CLUB</span></a>
                 <div class="step-indicator" id="stepIndicator">1 / 7</div>
             </header>
 
@@ -42,8 +40,8 @@
                         <span class="question-number">1 <span style="color: #4b5563">➜</span></span>
                         <h2>We're excited to get to know you! What's your <span class="highlight">full name</span>? *
                         </h2>
-                        <p class="helper-text">Example: John Doe</p>
-                        <input type="text" id="name" placeholder="Type your answer here..." autocomplete="off">
+                        <p class="helper-text">Example: Shashwat Mishra</p>
+                        <input type="text" id="name" placeholder="Shashwat Mishra" autocomplete="off">
                         <div class="error-msg" id="error-name">Please enter your name</div>
                         <div class="nav-buttons">
                             <button type="button" class="btn-next" onclick="nextStep()">OK ✓</button>
@@ -56,7 +54,8 @@
                         <span class="question-number">2 <span style="color: #4b5563">➜</span></span>
                         <h2>What's your <span class="highlight">college email</span> address? *</h2>
                         <p class="helper-text">We'll send updates here.</p>
-                        <input type="email" id="email" placeholder="name@college.edu" autocomplete="off">
+                        <input type="email" id="email" placeholder="av.sc.u4aie24053@av.students.amrita.edu"
+                            autocomplete="off">
                         <div class="error-msg" id="error-email">Please enter a valid email</div>
                         <div class="nav-buttons">
                             <button type="button" class="btn-next" onclick="nextStep()">OK ✓</button>
@@ -64,9 +63,22 @@
                         </div>
                     </div>
 
-                    <!-- Question 3: Year -->
+                    <!-- Question 3: Password -->
                     <div class="question-slide" data-step="3">
                         <span class="question-number">3 <span style="color: #4b5563">➜</span></span>
+                        <h2>Create a <span class="highlight">password</span> for your account. *</h2>
+                        <p class="helper-text">Min 6 chars. Keep it safe.</p>
+                        <input type="password" id="password" placeholder="••••••••" autocomplete="off">
+                        <div class="error-msg" id="error-password">Min 6 characters required</div>
+                        <div class="nav-buttons">
+                            <button type="button" class="btn-next" onclick="nextStep()">OK ✓</button>
+                            <button type="button" class="btn-prev" onclick="prevStep()">BACK</button>
+                        </div>
+                    </div>
+
+                    <!-- Question 4: Year -->
+                    <div class="question-slide" data-step="4">
+                        <span class="question-number">4 <span style="color: #4b5563">➜</span></span>
                         <h2>Which <span class="highlight">year</span> are you currently in? *</h2>
                         <div class="options-grid">
                             <label class="option-card" onclick="selectOption(this, 'year')">
@@ -96,9 +108,9 @@
                         </div>
                     </div>
 
-                    <!-- Question 4: Branch -->
-                    <div class="question-slide" data-step="4">
-                        <span class="question-number">4 <span style="color: #4b5563">➜</span></span>
+                    <!-- Question 5: Branch -->
+                    <div class="question-slide" data-step="5">
+                        <span class="question-number">5 <span style="color: #4b5563">➜</span></span>
                         <h2>Select your <span class="highlight">branch</span> of study. *</h2>
                         <select id="branch">
                             <option value="" disabled selected>Choose one...</option>
@@ -114,9 +126,9 @@
                         </div>
                     </div>
 
-                    <!-- Question 5: Section -->
-                    <div class="question-slide" data-step="5">
-                        <span class="question-number">5 <span style="color: #4b5563">➜</span></span>
+                    <!-- Question 6: Section -->
+                    <div class="question-slide" data-step="6">
+                        <span class="question-number">6 <span style="color: #4b5563">➜</span></span>
                         <h2>What is your <span class="highlight">section</span>? *</h2>
                         <input type="text" id="section" placeholder="e.g. A, B, C..." autocomplete="off">
                         <div class="error-msg" id="error-section">Please enter your section</div>
@@ -126,9 +138,9 @@
                         </div>
                     </div>
 
-                    <!-- Question 6: Interest -->
-                    <div class="question-slide" data-step="6">
-                        <span class="question-number">6 <span style="color: #4b5563">➜</span></span>
+                    <!-- Question 7: Interest -->
+                    <div class="question-slide" data-step="7">
+                        <span class="question-number">7 <span style="color: #4b5563">➜</span></span>
                         <h2>Which area interests you the most? *</h2>
                         <div class="options-grid">
                             <label class="option-card" onclick="selectOption(this, 'interest')">
@@ -158,9 +170,9 @@
                         </div>
                     </div>
 
-                    <!-- Question 7: Why Join -->
-                    <div class="question-slide" data-step="7">
-                        <span class="question-number">7 <span style="color: #4b5563">➜</span></span>
+                    <!-- Question 8: Why Join -->
+                    <div class="question-slide" data-step="8">
+                        <span class="question-number">8 <span style="color: #4b5563">➜</span></span>
                         <h2><span class="highlight">Why</span> do you want to join us? *</h2>
                         <p class="helper-text">Tell us what drives you...</p>
                         <textarea id="reason" rows="2" placeholder="Type your answer here..."></textarea>
@@ -175,25 +187,37 @@
                 </form>
 
                 <!-- Success Screen -->
-                <div class="success-screen" id="successScreen">
-                    <div class="success-icon">
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="success-screen" id="successScreen"
+                    style="display: none; flex-direction: column; align-items: center; text-align: center; padding: 2rem;">
+                    <div class="success-icon" style="margin-bottom: 20px;">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 50px; height: 50px;">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7">
                             </path>
                         </svg>
                     </div>
-                    <h2>Application <span class="highlight">Received</span></h2>
-                    <p style="color: #94a3b8; font-size: 1.1rem; margin-top: 1rem;">We'll be in touch shortly.</p>
-                    <a href="roboticsclubdesign.html"
-                        style="display: inline-block; margin-top: 2rem; color: var(--primary); text-decoration: none; font-weight: bold;">Return
-                        Home</a>
+                    <h2 style="font-family: 'Orbitron', sans-serif; margin-bottom: 10px;">Application <span
+                            class="highlight">Submitted</span></h2>
+                    <p style="color: #94a3b8; font-size: 1.1rem; margin-bottom: 30px;">Your application is currently
+                        <strong>UNDER REVIEW</strong>. <br> You will be able to login once an Admin accepts your
+                        request.
+                    </p>
+
+                    <div style="display: flex; flex-direction: column; gap: 15px; width: 100%; max-width: 250px;">
+                        <a href="login.html" class="btn-login-now"
+                            style="background: var(--primary); color: #000; text-align: center; padding: 12px; border-radius: 6px; font-weight: 800; text-decoration: none; font-family: 'Orbitron', sans-serif;">TRY
+                            LOGIN
+                            NOW</a>
+                        <a href="index.html"
+                            style="color: #94a3b8; text-align: center; text-decoration: none; font-size: 0.9rem;">Return
+                            to Home</a>
+                    </div>
                 </div>
 
             </div>
         </div>
     </div>
 
-    <script src="join-script.js"></script>
+    <script type="module" src="join-script.js"></script>
 </body>
 
 </html>

@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
             role: 'PRESIDENT',
             image: 'media/Shashwat.jpg',
             bio: 'Shashwat is a visionary leader with a passion for robotics and AI. He has led multiple successful projects and is dedicated to fostering a culture of innovation within the club.',
-            research: 'Autonomous Navigation, Swarm Robotics, Artificial Intelligence in Robotics.'
+            research: 'Autonomous Navigation, Defence Robotics, Artificial Intelligence in Robotics.'
         },
         'desai': {
             name: 'DR. RAVISHANKAR P DESAI',
@@ -96,9 +96,9 @@ document.addEventListener('DOMContentLoaded', () => {
         'charithasree': {
             name: 'CHARITHA SREE',
             role: 'GENERAL SECRETARY',
-            image: 'media/Charitha.jpg',
-            bio: 'Charitha is the organizational backbone of the club. She coordinates events, meetings, and communications effectively.',
-            research: 'Project Management, Soft Robotics, Bio-inspired Robotics.'
+            image: 'media/Charitha.jpeg',
+            bio: 'I’m Charitha Sree, a Computer Science student passionate about building impactful tech solutions. I work on full-stack development, AI-powered platforms, and competitive programming projects. I enjoy learning deeply, solving real-world problems, and constantly pushing my technical limits.',
+            research: 'Full-stack Development, AI Platforms, Competitive Programming.'
         }
     };
 

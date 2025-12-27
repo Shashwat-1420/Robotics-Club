@@ -43,6 +43,11 @@
                     <a href="#training" class="nav-link hover:text-cyan-400 transition-colors">TRAINING</a>
                     <a href="#team" class="nav-link hover:text-cyan-400 transition-colors">TEAM</a>
                     <a href="#gallery" class="nav-link hover:text-cyan-400 transition-colors">GALLERY</a>
+                    <!-- Auth Button Container -->
+                    <div id="auth-container">
+                        <a href="login.html"
+                            class="px-4 py-2 border border-cyan-400 text-cyan-400 font-bold font-orbitron rounded hover:bg-cyan-400 hover:text-black transition-all text-xs">LOGIN</a>
+                    </div>
                 </div>
                 <button id="mobile-menu-button" aria-label="Toggle navigation" aria-expanded="false"
                     class="md:hidden p-2 rounded border border-white/20 hover:border-cyan-400 text-white hover:text-cyan-400 transition-colors">
@@ -182,6 +187,20 @@
                             alt="Robotics Lab"
                             class="relative rounded-lg shadow-2xl border border-white/10 w-full object-cover h-[400px]">
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Upcoming Events Section -->
+        <section id="events" class="py-20 bg-slate-900/80 border-y border-white/5 relative hidden">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-5xl font-bold font-orbitron text-white mb-4">UPCOMING EVENTS</h2>
+                    <div class="h-1 w-24 bg-gradient-to-r from-purple-500 to-cyan-500 mx-auto"></div>
+                </div>
+
+                <div id="events-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Events will be populated here -->
                 </div>
             </div>
         </section>
@@ -564,7 +583,7 @@
                     <div
                         class="glass-card rounded-xl overflow-hidden flex flex-col md:flex-row border border-purple-500/30 shadow-[0_0_30px_rgba(168,85,247,0.15)]">
                         <div class="w-full md:w-1/3 relative group">
-                            <img class="w-full h-full object-cover min-h-[300px]" src="media/desai.jpeg"
+                            <img class="w-full h-full object-cover min-h-[300px]" src="media/desai.png"
                                 alt="Dr. Ravishankar P Desai">
                             <div
                                 class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent md:bg-gradient-to-r">
@@ -600,11 +619,20 @@
                                         class="px-3 py-1 bg-purple-500/20 border border-purple-500/40 rounded-full text-purple-300 text-xs font-mono">Control
                                         Systems</span>
                                     <span
-                                        class="px-3 py-1 bg-purple-500/20 border border-purple-500/40 rounded-full text-purple-300 text-xs font-mono">Human-Robot
-                                        Interaction</span>
+                                        class="px-3 py-1 bg-purple-500/20 border border-purple-500/40 rounded-full text-purple-300 text-xs font-mono">AI/ML
+                                        & RL for Autonomous Robot
+                                    </span>
                                     <span
-                                        class="px-3 py-1 bg-purple-500/20 border border-purple-500/40 rounded-full text-purple-300 text-xs font-mono">Industrial
-                                        Automation</span>
+                                        class="px-3 py-1 bg-purple-500/20 border border-purple-500/40 rounded-full text-purple-300 text-xs font-mono">Control
+                                        of Autonomous (Marine, Aerial, and Ground) Vehicles</span>
+                                    <span
+                                        class="px-3 py-1 bg-purple-500/20 border border-purple-500/40 rounded-full text-purple-300 text-xs font-mono">Process
+                                        and Biomedical Instrumentation
+                                    </span>
+                                    <span
+                                        class="px-3 py-1 bg-purple-500/20 border border-purple-500/40 rounded-full text-purple-300 text-xs font-mono">Underwater
+                                        and Medical Image Processing
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -721,7 +749,7 @@
                     <!-- Member 6: Charitha Sree -->
                     <div class="team-card glass-card rounded-xl overflow-hidden relative group h-96">
                         <img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                            src="media/Charitha.jpg" alt="Charitha Sree">
+                            src="media/Charitha.jpeg" alt="Charitha Sree">
                         <div
                             class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-slate-900 to-transparent z-10">
                             <h3 class="text-xl font-bold font-orbitron text-white">CHARITHA SREE</h3>
@@ -729,8 +757,8 @@
                         </div>
                         <div
                             class="team-overlay absolute inset-0 bg-slate-900/90 backdrop-blur-sm flex flex-col justify-center items-center p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20 translate-y-4 group-hover:translate-y-0">
-                            <p class="text-gray-300 italic text-center mb-6">"Leading with integrity and
-                                commitment."</p>
+                            <p class="text-gray-300 italic text-center mb-6">"Building impactful tech solutions and
+                                pushing technical limits."</p>
                             <button
                                 class="view-profile-btn px-6 py-2 border border-orange-400 text-orange-400 font-bold font-orbitron rounded hover:bg-orange-400 hover:text-black transition-all"
                                 data-id="charithasree">
@@ -921,8 +949,185 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <!-- Placeholder for auth buttons in header/nav -->
+    <!-- This div should ideally be placed within your actual header/navigation structure -->
+    <!-- For this specific content, it's placed here as a functional placeholder -->
+    <div id="auth-container" class="absolute top-4 right-4 z-50">
+        <!-- Login/Profile button will be rendered here by JavaScript -->
+    </div>
 
+    <script src="script.js"></script>
+    <script type="module">
+        import { monitorAuthState, logoutUser } from './auth.js';
+        import { db } from './firebase-config.js';
+        import { getUpcomingEvents } from './events.js';
+        import { doc, getDoc, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        // Auth Logic
+        const authContainer = document.getElementById('auth-container');
+
+        monitorAuthState(async (user) => {
+            const heroJoinBtn = document.querySelector('a[href="join-us.html"]');
+
+            if (user) {
+                // Change Hero Button
+                if (heroJoinBtn) {
+                    heroJoinBtn.innerText = "EXPLORE EVENTS";
+                    heroJoinBtn.href = "#events";
+                    heroJoinBtn.classList.remove('border-purple-500', 'text-purple-400', 'hover:bg-purple-500/10', 'hover:text-purple-300');
+                    heroJoinBtn.classList.add('bg-purple-600', 'text-white', 'hover:bg-purple-500', 'border-transparent');
+                }
+
+                // Fetch User Details
+                let userData = {};
+                try {
+                    const userDoc = await getDoc(doc(db, "users", user.uid));
+                    if (userDoc.exists()) {
+                        userData = userDoc.data();
+                    }
+                } catch (e) { console.error(e); }
+
+                const isAdmin = userData.role === 'admin';
+                const avatarUrl = `https://api.dicebear.com/9.x/bottts-neutral/svg?seed=${user.uid}`;
+
+                authContainer.innerHTML = `
+                    <div class="flex items-center space-x-4">
+                        <div class="relative group">
+                            <button class="flex items-center space-x-3 text-cyan-400 hover:text-white transition-all group-hover:bg-slate-800/50 p-2 rounded-lg">
+                                <img src="${avatarUrl}" alt="Avatar" class="w-8 h-8 rounded-full border border-cyan-500/50 bg-slate-900">
+                                <div class="text-left hidden md:block">
+                                    <p class="font-orbitron font-bold text-xs uppercase text-white">${userData.name || 'Member'}</p>
+                                    <p class="text-[10px] text-cyan-500 font-mono">${userData.memberId || 'ID: PENDING'}</p>
+                                </div>
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </button>
+                            
+                            <!-- Enhanced Profile Dropdown -->
+                            <div class="absolute right-0 mt-2 w-72 bg-slate-800 border border-slate-700 rounded-lg shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top-right z-50 overflow-hidden backdrop-blur-md">
+                                
+                                <!-- Header -->
+                                <div class="p-4 bg-slate-900/50 border-b border-slate-700 flex items-center space-x-4">
+                                    <img src="${avatarUrl}" alt="Avatar" class="w-12 h-12 rounded-full border-2 border-cyan-500 bg-slate-900">
+                                    <div class="overflow-hidden">
+                                        <h4 class="font-orbitron font-bold text-white text-sm truncate">${userData.name || 'Robotics Member'}</h4>
+                                        <p class="text-xs text-gray-400 truncate">${user.email}</p>
+                                        <span class="inline-block px-2 py-0.5 mt-1 rounded text-[10px] bg-cyan-900 text-cyan-300 border border-cyan-500/30 uppercase tracking-wider font-mono">
+                                            ${userData.role || 'MEMBER'}
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <!-- Details -->
+                                <div class="p-4 space-y-3">
+                                    <div class="flex justify-between text-xs">
+                                        <span class="text-slate-500">Member ID</span>
+                                        <span class="text-white font-mono">${userData.memberId || 'PENDING'}</span>
+                                    </div>
+                                    <div class="flex justify-between text-xs">
+                                        <span class="text-slate-500">Branch / Year</span>
+                                        <span class="text-gray-300">${userData.branch || '-'} / ${userData.year || '-'}</span>
+                                    </div>
+                                    <div class="flex justify-between text-xs">
+                                        <span class="text-slate-500">Since</span>
+                                        <span class="text-gray-300">${userData.createdAt ? new Date(userData.createdAt).toLocaleDateString() : 'N/A'}</span>
+                                    </div>
+                                </div>
+
+                                <!-- Borrowed Hardware (Phase 3) -->
+                                <div class="px-4 pb-4 border-t border-slate-700/50">
+                                    <h5 class="text-[10px] font-bold font-orbitron text-purple-400 mt-3 mb-2 tracking-widest uppercase">Borrowed Components</h5>
+                                    <div id="memberHardwareList" class="space-y-2">
+                                        <p class="text-[10px] text-slate-500 italic text-center py-2">Loading...</p>
+                                    </div>
+                                </div>
+
+                                <!-- Actions -->
+                                <div class="bg-slate-900/30 p-2 border-t border-slate-700">
+                                    ${isAdmin ? `
+                                    <a href="dashboard.html" class="flex items-center px-4 py-2 text-sm text-purple-400 hover:bg-slate-700 rounded transition-colors mb-1">
+                                        <svg class="w-4 h-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                                        Admin Dashboard
+                                    </a>` : ''}
+                                    
+                                    <button id="logoutBtn" class="w-full flex items-center px-4 py-2 text-sm text-red-400 hover:bg-slate-700 rounded transition-colors">
+                                        <svg class="w-4 h-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                                        Sign Out
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                document.getElementById('logoutBtn').addEventListener('click', logoutUser);
+
+                // Fetch Borrowed Hardware
+                if (userData.memberId && userData.memberId !== 'PENDING') {
+                    try {
+                        const q = query(collection(db, "allocations"), where("memberId", "==", userData.memberId), where("status", "==", "issued"));
+                        const snap = await getDocs(q);
+                        const listEl = document.getElementById('memberHardwareList');
+                        if (listEl) {
+                            if (snap.empty) {
+                                listEl.innerHTML = '<p class="text-[10px] text-slate-500 italic text-center py-2">No components borrowed.</p>';
+                            } else {
+                                listEl.innerHTML = snap.docs.map(docSnap => `
+                                    <div class="flex justify-between items-center text-[10px] bg-slate-900/50 p-1.5 rounded border border-white/5">
+                                        <span class="text-gray-300 truncate mr-2" title="${docSnap.data().itemName}">${docSnap.data().itemName}</span>
+                                        <span class="text-cyan-600 font-mono flex-shrink-0">${docSnap.data().expectedReturn}</span>
+                                    </div>
+                                `).join('');
+                            }
+                        }
+                    } catch (err) { console.error("Error fetching member hardware:", err); }
+                }
+
+            } else {
+                authContainer.innerHTML = `
+                    <a href="login.html" class="px-4 py-2 border border-cyan-400 text-cyan-400 font-bold font-orbitron rounded hover:bg-cyan-400 hover:text-black transition-all text-xs">LOGIN</a>
+                `;
+            }
+        });
+
+        // Load Events
+        async function loadEvents() {
+            const events = await getUpcomingEvents();
+            const eventsSection = document.getElementById('events');
+            const eventsGrid = document.getElementById('events-grid');
+
+            if (events.length > 0) {
+                eventsSection.classList.remove('hidden');
+                eventsGrid.innerHTML = events.map(event => `
+                    <div class="glass-card rounded-xl overflow-hidden group hover:border-cyan-500/50 transition-all duration-300 flex flex-col h-full">
+                        <div class="h-48 overflow-hidden relative">
+                            <img src="${event.image || 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80'}" 
+                                 alt="${event.title}" 
+                                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <div class="absolute top-4 right-4 bg-black/70 backdrop-blur px-3 py-1 rounded border border-white/20">
+                                <span class="text-cyan-400 font-mono text-xs font-bold">
+                                    ${event.comingSoon ? 'COMING SOON' : new Date(event.date).toLocaleDateString()}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow">
+                            <h3 class="text-xl font-bold font-orbitron text-white mb-2 group-hover:text-cyan-400 transition-colors">${event.title}</h3>
+                            <p class="text-gray-400 text-sm mb-6 flex-grow line-clamp-3">${event.description}</p>
+                            ${event.comingSoon ?
+                        `<div class="w-full text-center px-4 py-2 bg-slate-800/50 text-slate-500 border border-slate-700 rounded font-bold font-orbitron text-sm cursor-default">
+                                    STAY TUNED
+                                </div>` :
+                        `<a href="${event.link || '#'}" class="w-full text-center px-4 py-2 bg-slate-800 hover:bg-cyan-600 text-cyan-400 hover:text-black border border-cyan-500/30 hover:border-transparent rounded font-bold font-orbitron text-sm transition-all">
+                                    REGISTER NOW
+                                </a>`
+                    }
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+        loadEvents();
+
+    </script>
 </body>
 
 </html>

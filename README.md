@@ -12,7 +12,7 @@ The design philosophy follows a **futuristic, glassmorphism aesthetic** with neo
 
 ## Features Implemented (Phase 1)
 
-### 1. Public Landing Page (`roboticsclubdesign.html`)
+### 1. Public Landing Page (`index.html`)
 The main entry point to our digital ecosystem, featuring:
 - **Hero Section:** Dynamic typewriter effect ("INNOVATE. BUILD. INSPIRE.") and impactful call-to-action.
 - **About & Mission:** Highlights our vision, theme, and key areas of interest (Sensor Integration, AI, etc.).
@@ -47,7 +47,7 @@ A basic administration interface for club management:
    git clone <repository-url>
    ```
 2. **Open the Website:**
-   - Simply open `roboticsclubdesign.html` in any modern web browser.
+   - Simply open `index.html` in any modern web browser.
    - For the registration page, navigate to `join-us.html`.
    - For the dashboard, navigate to `dashboard.html`.
 3. **Note:** Since this project currently uses Tailwind via CDN, an internet connection is required for styles to load correctly.

@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
         'yashashwini': {
             name: 'YASHASHWINI RAO',
             role: 'STUDENT MENTOR',
-            image: 'media/Yashashwini.jpg',
+            image: 'media/Yashashwini.jpeg',
             bio: 'Yashashwini is an experienced senior member who loves teaching and mentoring juniors. She specializes in embedded systems and circuit design.',
             research: 'Embedded Systems, IoT, Signal Processing.'
         },
@@ -90,8 +90,8 @@ document.addEventListener('DOMContentLoaded', () => {
             name: 'SHAIK THASLIM',
             role: 'TREASURER',
             image: 'media/Thaslim.jpg',
-            bio: 'Thaslim manages the club\'s finances with precision and transparency. She is also an active contributor to hardware projects.',
-            research: 'Financial Management in Tech, PCB Design, Sensors.'
+            bio: 'Shaik Thaslim, an Artificial Intelligence student with experience in analytical thinking and problem-solving. As Treasurer, she ensures efficient management of resources while supporting technically driven initiatives within the club.',
+            research: 'Applied AI, Intelligent Systems, Data-Driven Problem Solving.'
         },
         'charithasree': {
             name: 'CHARITHA SREE',

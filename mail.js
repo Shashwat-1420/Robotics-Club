@@ -16,18 +16,36 @@ script.onload = () => {
     }
 };
 
-export const sendStatusNotification = async (userData, newStatus) => {
-    const { name, email, memberId } = userData;
+export const sendStatusNotification = async (email, name, memberId, newStatus) => {
+
+    console.log(`[MAIL DEBUG] Sending to: ${email}, Name: ${name}, ID: ${memberId}, Status: ${newStatus}`);
 
     if (MAIL_CONFIG.PUBLIC_KEY === "YOUR_PUBLIC_KEY") {
         console.warn("[MAIL SYSTEM] Mail not sent: Configuration missing in mail-config.js");
-        console.log(`%c[SIMULATION] Email to ${email} (Status: ${newStatus})`, "color: #eab308; font-weight: bold;");
         return;
     }
 
+    if (!email) {
+        console.error("[MAIL ERROR] Email address is missing or empty.");
+        throw new Error("Cannot send email: Recipient address is empty.");
+    }
+
+    const templateId = newStatus === 'accepted'
+        ? MAIL_CONFIG.ACCEPTANCE_TEMPLATE_ID
+        : MAIL_CONFIG.REJECTION_TEMPLATE_ID;
+
     const templateParams = {
+        // "Shotgun" approach: Send common variations since we don't know the exact
+        // variable name configured in the user's EmailJS template "To" field.
         to_name: name,
+
+        // Target variations
         to_email: email,
+        email: email,
+        user_email: email,
+        recipient: email,
+        reply_to: email,
+
         member_id: memberId || 'Pending',
         status: newStatus,
         message: newStatus === 'accepted'
@@ -38,7 +56,7 @@ export const sendStatusNotification = async (userData, newStatus) => {
     try {
         const response = await emailjs.send(
             MAIL_CONFIG.SERVICE_ID,
-            MAIL_CONFIG.TEMPLATE_ID,
+            templateId,
             templateParams
         );
         console.log("[MAIL SYSTEM] Email sent successfully!", response.status, response.text);

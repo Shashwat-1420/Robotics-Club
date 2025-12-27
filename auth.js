@@ -66,7 +66,7 @@ export async function loginUser(email, password) {
             }
 
             // If accepted/approved
-            window.location.href = 'roboticsclubdesign.html';
+            window.location.href = 'index.html';
         } else {
             // Doc missing?
             await signOut(auth);
